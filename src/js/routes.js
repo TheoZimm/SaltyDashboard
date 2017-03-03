@@ -4,6 +4,9 @@ import App from './App';
 import Home from './views/Home/';
 import Login from './views/Login/';
 import Profile from './views/Profile/';
+// import AdminArea from './components/AdminArea';
+// import UserArea from './components/UserArea';
+import NotAuthorized from './views/NotAuthorized/';
 
 const rootPath = '/';
 
@@ -12,9 +15,17 @@ const routes = (
     <Route path={rootPath} component={App}>
       <IndexRoute component={Home} />
     </Route>
-    <Route path="/login" component={Login}/>
-    <Route path="/profile" component={Profile}/>
+    <Route path="/login" component={Login} />
+     <Route path="/not-authorized" component={NotAuthorized} />
+    <Route authorize={['user']} component={UserArea}>
+      <Route path='/profile' component={Profile}/>
+    </Route>
+    <Route authorize={['admin']} component={AdminArea}>
+      <Route path='/userManagement' component={UserManagement}/>
+    </Route>
+
   </Router>
+
 );
 
 export default routes;

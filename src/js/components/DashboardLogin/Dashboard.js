@@ -1,4 +1,5 @@
 import React from 'react';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import axios from 'axios';
 
 class DashboardLogin extends React.Component {
@@ -24,20 +25,20 @@ class DashboardLogin extends React.Component {
         });
     }
 
-    handleSubmit(event) {
-        // Axios nice
-        axios.post('localhost:23000/api/auth', {
+    handleSubmit(e) {
+        e.preventDefault();
+        axios.post('http://localhost:23000/api/auth', {
             username: this.state.login,
             password: this.state.password
-        })
-            .then(function (response) {
-                console.log(response);
-                // Make redirect to profile page + create user in node json
-            })
-            .catch(function (error) {
-                // Make redirect to profile page for test
-            });
-
+        }).then(this.handleRedirect)
+    }
+      
+    handleRedirect(res) {
+        if (res.status == 200) {
+           browserHistory.push('/profile')
+        }else {
+            console.log('oups');
+        }
     }
 
     render() {
