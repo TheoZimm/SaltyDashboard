@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './App';
 import Home from './views/Home/';
 import Login from './views/Login/';
+import Profile from './views/Profile/';
 
 const rootPath = '/';
 
@@ -11,7 +12,8 @@ const routes = (
     <Route path={rootPath} component={App}>
       <IndexRoute component={Home} />
     </Route>
-    <Route path="/connect" component={Login}/>
+    <Route path="/login" component={Login}/>
+    <Route path="/profile" component={Profile}/>
   </Router>
 );
 

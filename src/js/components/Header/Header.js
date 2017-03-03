@@ -16,7 +16,7 @@ export default function AppHeader (props) {
           <Anchor href="#">Welcome to SaltyApp</Anchor>
         </Menu>
         <Box flex="grow" align="end">
-      <Anchor href="/connect">click here to connect</Anchor>
+      <Anchor href="/login">Login</Anchor>
         </Box>
       </Box>
     </Header>

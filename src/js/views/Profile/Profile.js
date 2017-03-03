@@ -1,17 +1,16 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
 import Header from '../../components/Header/';
-import DashboardLogin from '../../components/DashboardLogin';
-class Login extends React.Component {
+class Profile extends React.Component {
 
   render() {
 
     return (
       <Box>
         <Header />
-        <DashboardLogin />
+        <h1>Success !</h1>
       </Box>
     );
   };
 };
-export default Login;
+export default Profile;
