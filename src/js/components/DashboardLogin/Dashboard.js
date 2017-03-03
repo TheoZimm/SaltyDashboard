@@ -45,29 +45,30 @@ class DashboardLogin extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Login:
-          <input
+                    <input
                         name="login"
                         type="text"
                         required
                         onChange={this.handleChange}
-                        value={this.state.login} />
+                        value={this.state.login}/>
                 </label>
                 <br />
                 <label>
                     Password:
-                <input
+                    <input
                         name="password"
                         type="password"
                         required
                         onChange={this.handleChange}
-                        value={this.state.password} />
+                        value={this.state.password}/>
                 </label>
 
-                <input type="submit" value="Login" />
+                <input type="submit" value="Login"/>
             </form>
         );
     }
-};
+}
+;
 
 export default DashboardLogin;
 
