@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
                  pad='medium'
                  margin='small'
                  colorIndex='light-1' >
-                <Search placeHolder='Search'
+                <Search placeHolder='Titre / Description / Tags'
                         inline={true}
                         size='medium'
                         dropAlign={{"right": "right"}}
