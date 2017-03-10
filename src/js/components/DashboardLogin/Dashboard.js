@@ -1,6 +1,7 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import browserHistory from 'react-router';
 import axios from 'axios';
+import Box from 'grommet/components/Box';
 
 class DashboardLogin extends React.Component {
     constructor(props) {
@@ -30,46 +31,52 @@ class DashboardLogin extends React.Component {
         axios.post('http://localhost:23000/api/auth', {
             username: this.state.login,
             password: this.state.password
-        }).then(this.handleRedirect)
+        }).then(this.handleRedirect);
     }
-      
+
     handleRedirect(res) {
         if (res.status == 200) {
-           browserHistory.push('/profile')
-        }else {
+            browserHistory.push('/profile');
+        } else {
             console.log('oups');
         }
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Login:
-                    <input
-                        name="login"
-                        type="text"
-                        required
-                        onChange={this.handleChange}
-                        value={this.state.login}/>
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input
-                        name="password"
-                        type="password"
-                        required
-                        onChange={this.handleChange}
-                        value={this.state.password}/>
-                </label>
+            <Box direction='row'
+                 justify='center'
+                 align='center'
+                 pad='medium'
+                 margin='small'
+                 colorIndex='light-1'>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Login:
+                        <input
+                            name="login"
+                            type="text"
+                            required
+                            onChange={this.handleChange}
+                            value={this.state.login}/>
+                    </label>
+                    <br />
+                    <label>
+                        Password:
+                        <input
+                            name="password"
+                            type="password"
+                            required
+                            onChange={this.handleChange}
+                            value={this.state.password}/>
+                    </label>
 
-                <input type="submit" value="Login"/>
-            </form>
+                    <input type="submit" value="Login"/>
+                </form>
+            </Box>
         );
     }
 }
 ;
 
 export default DashboardLogin;
-

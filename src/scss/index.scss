@@ -1,5 +1,27 @@
 @import 'grommet/scss/vanilla/index';
 
 .grommetux-form-field {
-    overflow:hidden;
+  overflow: hidden;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.label {
+  //display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  //white-space: nowrap;
+  //vertical-align: baseline;
+  border-radius: .25em;
+  margin:3px;
+  width: 100%;
+}
+
+.label-success {
+  background-color: #5cb85c;
 }
