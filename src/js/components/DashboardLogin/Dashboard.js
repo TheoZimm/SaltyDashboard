@@ -1,15 +1,17 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 class DashboardLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             login: '',
-            password: ''
+            password: '',
+            role: ''
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -30,14 +32,21 @@ class DashboardLogin extends React.Component {
         axios.post('http://localhost:23000/api/auth', {
             username: this.state.login,
             password: this.state.password
-        }).then(this.handleRedirect)
+        }).then(this.handleRedirect);
     }
-      
+
     handleRedirect(res) {
-        if (res.status == 200) {
-           browserHistory.push('/profile')
-        }else {
-            console.log('oups');
+        const decodeToken = jwt_decode(res.data);
+        const role = decodeToken.role;
+        Cookies.set('role',role);
+        console.log(Cookies.get('role'));
+      
+        if (res.status == 200 && role == 'user') {
+            browserHistory.push('/profile');
+        } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'Administrator' ) {
+            browserHistory.push('/userManagement');
+        } else {
+            console.log("oups");
         }
     }
 
