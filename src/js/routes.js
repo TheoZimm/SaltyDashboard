@@ -9,6 +9,9 @@ import AdminArea from './views/AdminArea';
 import UserManagement from './views/UserManagement';
 import UserArea from './views/UserArea';
 import UnAuthorized from './views/UnAuthorized/';
+// import AdminArea from './components/AdminArea';
+// import UserArea from './components/UserArea';
+// import NotAuthorized from './views/NotAuthorized/';
 
 const rootPath = '/';
 

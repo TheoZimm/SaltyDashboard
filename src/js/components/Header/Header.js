@@ -25,12 +25,12 @@ export default function AppHeader(props) {
         </Menu>
         {CurrentRole == ['user'] ? (
         <Box flex="grow" align="end">
-          <Anchor href="/disconnect">disconnect</Anchor>
+          <Anchor href="/login">disconnect & login </Anchor>
           <Anchor href="/profile">Logged as {CurrentRole}</Anchor>
         </Box>
-        ) : CurrentRole == ['admin'] || CurrentRole == ['Project Manager'] || CurrentRole == ['Administrator'] ? (
+        ) : CurrentRole == ['admin'] || CurrentRole == ['Project manager'] || CurrentRole == ['Administrator'] ? (
         <Box flex="grow" align="end">
-          <Anchor href="/disconnect">disconnect</Anchor>
+          <Anchor href="/login">disconnect & login </Anchor>
           <Anchor href="/userManagement">Logged as {CurrentRole}</Anchor>
         </Box>
         ) : ( 
