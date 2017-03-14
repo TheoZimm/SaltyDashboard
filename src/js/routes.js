@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './App';
-import Home from './views/Home/';
+import AppView from './views/App/';
 import Login from './views/Login/';
 import Profile from './views/Profile/';
 // import AdminArea from './components/AdminArea';
@@ -13,7 +13,7 @@ const rootPath = '/';
 const routes = (
   <Router history={browserHistory} >
     <Route path={rootPath} component={App}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={AppView} />
     </Route>
     <Route path="/login" component={Login} />
      {/*<Route path="/not-authorized" component={NotAuthorized} />*/}
