@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 class Disconnect extends Component {
 
   componentWillMount() {
-      this.logout()
+      this.logout();
       browserHistory.push('/login');
   }
 

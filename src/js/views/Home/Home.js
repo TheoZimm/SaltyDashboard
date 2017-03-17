@@ -10,17 +10,24 @@ class Home extends React.Component {
 
         this.state = {
             searchTerms: '',
-            tags: []
+            tags: [],
+            date: ''
         };
 
         this.handleChangeTerms = this.handleChangeTerms.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
 
     }
 
     handleChangeTerms(searchTerms) {
 
         this.setState({ searchTerms });
+    }
+
+    handleChangeDate(date) {
+
+        this.setState({ date });
     }
 
     handleChangeTags(tags) {
@@ -41,8 +48,16 @@ class Home extends React.Component {
         return (
             <Box>
                 <Header />
-                <SearchBar onChange={this.handleChangeTerms} onClick={this.handleChangeTags} projects={this.props.projects} />
-                <ProjectsFeed searchTerms={this.state.searchTerms} searchTags={this.state.tags} projects={this.props.projects} />
+                <SearchBar
+                        onTermsChange={this.handleChangeTerms}
+                        onClick={this.handleChangeTags}
+                        onDateChange={this.handleChangeDate}
+                        projects={this.props.projects}  />
+                <ProjectsFeed
+                        searchTerms={this.state.searchTerms}
+                        searchTags={this.state.tags}
+                        searchDate={this.state.date}
+                        projects={this.props.projects} />
             </Box>
         );
     };

@@ -18,11 +18,11 @@ class ProjectsFeed extends React.Component {
 
 
     render() {
-        let { projects, searchTerms, searchTags } = this.props;
+        let { projects, searchTerms, searchTags, searchDate } = this.props;
 
         if(searchTerms) {
             projects = projects.filter(project => {
-                return project.title.toLowerCase().indexOf(this.props.searchTerms.toLowerCase()) >= 0 || project.description.toLowerCase().indexOf(this.props.searchTerms.toLowerCase()) >= 0;
+                return project.title.toLowerCase().indexOf(searchTerms.toLowerCase()) >= 0 || project.description.toLowerCase().indexOf(searchTerms.toLowerCase()) >= 0;
             });
         }
 
@@ -34,17 +34,31 @@ class ProjectsFeed extends React.Component {
             });
         }
 
+        if(searchDate) {
+
+            let projectSearchDate = new Date(searchDate);
+
+            projects = projects.filter(project => {
+
+                let projectDeadline = new Date(project.deadline);
+
+                return projectDeadline >= projectSearchDate;
+            });
+        }
+
         if (projects.length) {
 
             ////////////////////////////////////////
 
             return (
 
+            <Box>
+                <Box><Label>Projet(s) : {projects.length}</Label></Box>
 
                 <Columns masonry={false}
                          size='medium'>
 
-                    <Box full="true" size="full"><Label>Projet(s) : {projects.length}</Label></Box>
+
 
                     {projects.map((project) => {
                         return (
@@ -87,6 +101,7 @@ class ProjectsFeed extends React.Component {
                     }
 
                 </Columns>
+            </Box>
             );
         } else {
             return (

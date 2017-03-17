@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
 import { RoleAwareComponent } from 'react-router-role-authorization';
-import Cookies from 'js-cookie';
 import List from 'grommet/components/List';
 import Heading from 'grommet/components/Heading';
 import ListItem from 'grommet/components/ListItem';

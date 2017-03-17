@@ -1,7 +1,6 @@
 import React from 'react';
 import { AuthorizedComponent } from 'react-router-role-authorization';
 import routes from '../../routes';
-import Cookies from 'js-cookie';
 
 class AdminArea extends AuthorizedComponent {
 

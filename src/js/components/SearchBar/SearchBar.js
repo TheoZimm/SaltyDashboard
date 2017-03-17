@@ -13,17 +13,31 @@ class SearchBar extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            searchTerms: '',
+            tags: [],
+            date: ''
+        };
+
         this.handleChangeTerms = this.handleChangeTerms.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
+        this.handleChangeDate = this.handleChangeDate.bind(this);
     }
 
 
     handleChangeTerms(e) {
-        this.props.onChange(e.target.value);
+        this.setState({ searchTerms: searchTerms });
+        this.props.onTermsChange(e.target.value);
     }
 
     handleChangeTags(e) {
+        this.setState({tags: tempTags});
         this.props.onClick(e.target.value);
+    }
+
+    handleChangeDate(e) {
+        this.setState({ date: e });
+        this.props.onDateChange(e);
     }
 
     render() {
@@ -75,9 +89,11 @@ class SearchBar extends React.Component {
                     </Menu>
 
                     <FormField>
-                        <DateTime id='id'
-                                  name='name'
-                                  format='D/M/YYYY'/>
+                        <DateTime id='date'
+                                  name='date'
+                                  format='M/D/YYYY'
+                                  onChange={this.handleChangeDate}
+                                  value={this.state.date}/>
                     </FormField>
 
                 </Box>

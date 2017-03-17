@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Box from 'grommet/components/Box';
 import Header from '../../components/Header/';
-import Cookies from 'js-cookie';
 class UnAuthorized extends Component {
 
   render() {
