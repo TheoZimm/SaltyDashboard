@@ -1,14 +1,17 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
+import Columns from 'grommet/components/Columns';
 import Header from '../../components/Header/';
 import { RoleAwareComponent } from 'react-router-role-authorization';
-import Cookies from 'js-cookie';
+import UsersList from '../../components/UsersList';
+import UserCreate from '../../components/UserCreate';
+
 class UserManagement extends RoleAwareComponent {
 
   constructor(props) {
     super(props);
-    this.userRoles = [Cookies.get('role')];
-    this.allowedRoles = ['admin', 'Project manager', 'Administrator'];
+    this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
+    this.allowedRoles = ['administrator', 'Administrator', 'Admin', 'Project Manager'];
 
   }
 
@@ -17,10 +20,13 @@ class UserManagement extends RoleAwareComponent {
     const jsx = (
       <Box>
         <Header />
-        <h1>MANAGE YOUR USERS</h1>
+        <Columns justify='center' size='medium'>
+          <UserCreate />
+          <UsersList />
+        </Columns>
       </Box>
-    );  
-  return this.rolesMatched() ? jsx : null;
+        );
+    return this.rolesMatched() ? jsx : null;
   }
 };
 export default UserManagement;

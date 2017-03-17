@@ -2,7 +2,6 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import Cookies from 'js-cookie';
 import Box from 'grommet/components/Box';
 
 class DashboardLogin extends React.Component {
@@ -28,6 +27,8 @@ class DashboardLogin extends React.Component {
         });
     }
 
+
+
     handleSubmit(e) {
         e.preventDefault();
         axios.post('http://localhost:23000/api/auth', {
@@ -39,15 +40,15 @@ class DashboardLogin extends React.Component {
     handleRedirect(res) {
         const decodeToken = jwt_decode(res.data);
         const role = decodeToken.role;
-        Cookies.set('role', role);
-        console.log(Cookies.get('role'));
+        localStorage.setItem('user', JSON.stringify(decodeToken));
+        localStorage.setItem('token', res.data);
+        console.log(role);
 
         if (res.status == 200 && role == 'user') {
             browserHistory.push('/profile');
-        } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'Administrator' || res.status == 200 && role == 'Project manager') {
+        } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'administrator' || res.status == 200 && role == 'Administrator' || res.status == 200 && role == 'Project manager') {
             browserHistory.push('/userManagement');
         } else {
-            console.log("oups");
             if (res.status == 200) {
                 browserHistory.push('/profile');
             } else {

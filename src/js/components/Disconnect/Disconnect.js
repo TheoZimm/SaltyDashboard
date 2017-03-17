@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
-import { AuthorizedComponent } from 'react-router-role-authorization';
 import { browserHistory } from 'react-router';
 
-class Disconnect extends React.Component{
- constructor(props, context) {
-    super(props, context);
+class Disconnect extends Component {
 
-    this.state = {
-      login: '',
-      password: '',
-      role:'',
-    }
+  componentWillMount() {
+      this.logout()
+      browserHistory.push('/login');
   }
-    componentWillMount() {
-        console.log('Setting state...');
-        this.setState({login: '', password:'', role:'disconnected'}, function() {
-        }.bind(this));
-             browserHistory.push('/login');
-    }
-    render() {
+
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  isLoggedIn() {
+    return this.getUser() != null;
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+  render() {
     return (
       <div>
-      {this.state.testing}
-       {/*<routes {...this.props} />*/}
+      {console.log('userRemoved from localStorage')}
       </div>
     );
-    };
+  };
 };
 
 export default Disconnect;

@@ -7,15 +7,13 @@ class AdminArea extends AuthorizedComponent {
 
   constructor(props) {
     super(props);
-    this.userRoles = [Cookies.get('role')];
+    this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
     this.notAuthorizedPath = '/unauthorized';
   }
 
   render() {
-     console.log(...this.props);
     return (
       <div>
-     
         <routes {...this.props}/>
       </div>
     );

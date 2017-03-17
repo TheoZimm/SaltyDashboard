@@ -24,7 +24,7 @@ const routes = (
       <Route authorize={['user']} component={UserArea}>
         <Route path='/profile' component={Profile} />
       </Route>
-      <Route authorize={['admin', 'Project manager', 'Administrator']} component={AdminArea}>
+      <Route authorize={['admin', 'Project manager', 'Administrator', 'administrator']} component={AdminArea}>
         <Route path='/userManagement' component={UserManagement} />
       </Route>
     </Route>
