@@ -2,65 +2,51 @@ import React from 'react';
 import Box from 'grommet/components/Box';
 import Card from 'grommet/components/Card';
 import Columns from 'grommet/components/Columns';
-import axios from 'axios';
 import UserManagerIcon from 'grommet/components/icons/base/UserManager';
 import UserIcon from 'grommet/components/icons/base/User';
 import Anchor from 'grommet/components/Anchor';
 import DeliverIcon from 'grommet/components/icons/base/Deliver';
 import Timestamp from 'grommet/components/Timestamp';
+import Label from 'grommet/components/Label';
 
 
 class ProjectsFeed extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            projects: ''
-        };
-
-    }
-
-    componentDidMount() {
-        var self = this;
-
-        axios.get('http://localhost:23000/api/projects')
-            .then(function (response) {
-                self.setState({
-                    projects: response.data
-                });
-            })
-            .catch(function (error) {
-                // Make redirect to profile page for test
-            });
     }
 
 
     render() {
+        let { projects, searchTerms, searchTags } = this.props;
 
-        if (this.state.projects.length != 0) {
-
-            // Push result of search in a new array
-            //-------------------------------------
-            var filteredProjects = [];
-            var self = this;
-
-            this.state.projects.forEach((project) => {
-                if (project.title.toLowerCase().includes(self.props.searchTerms.toLowerCase()) || project.description.toLowerCase().includes(self.props.searchTerms.toLowerCase())) {
-                    filteredProjects.push(project);
-                }
+        if(searchTerms) {
+            projects = projects.filter(project => {
+                return project.title.toLowerCase().indexOf(this.props.searchTerms.toLowerCase()) >= 0 || project.description.toLowerCase().indexOf(this.props.searchTerms.toLowerCase()) >= 0;
             });
+        }
 
-            if (filteredProjects.length == 0) {
-                filteredProjects = this.state.projects;
-            }
+        if(searchTags.length) {
+            projects = projects.filter(project => {
+                return project.tags.filter(tag => {
+                   return searchTags.indexOf(tag) >= 0;
+                }).length;
+            });
+        }
+
+        if (projects.length) {
+
             ////////////////////////////////////////
 
             return (
-                <Columns masonry={false}
-                         size='medium'
-                         justify='center'>
 
-                    {filteredProjects.map((project) => {
+
+                <Columns masonry={false}
+                         size='medium'>
+
+                    <Box full="true" size="full"><Label>Projet(s) : {projects.length}</Label></Box>
+
+                    {projects.map((project) => {
                         return (
                             <Box key={project.title} align='center'
                                  pad='medium'

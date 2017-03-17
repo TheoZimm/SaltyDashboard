@@ -9,21 +9,40 @@ class Home extends React.Component {
         super(props);
 
         this.state = {
-            searchTerms: ''
+            searchTerms: '',
+            tags: []
         };
-        this.handleChange = this.handleChange.bind(this);
+
+        this.handleChangeTerms = this.handleChangeTerms.bind(this);
+        this.handleChangeTags = this.handleChangeTags.bind(this);
+
     }
 
-    handleChange(searchTerms) {
+    handleChangeTerms(searchTerms) {
+
         this.setState({ searchTerms });
+    }
+
+    handleChangeTags(tags) {
+
+        let tempTags = this.state.tags;
+        let index = tempTags.indexOf(tags);
+
+        if(index == -1) {
+            tempTags.push(tags);
+        } else {
+            tempTags.splice(index, 1);
+        }
+
+        this.setState({tags: tempTags});
     }
 
     render() {
         return (
             <Box>
                 <Header />
-                <SearchBar onChange={this.handleChange} />
-                <ProjectsFeed searchTerms={this.state.searchTerms} />
+                <SearchBar onChange={this.handleChangeTerms} onClick={this.handleChangeTags} projects={this.props.projects} />
+                <ProjectsFeed searchTerms={this.state.searchTerms} searchTags={this.state.tags} projects={this.props.projects} />
             </Box>
         );
     };

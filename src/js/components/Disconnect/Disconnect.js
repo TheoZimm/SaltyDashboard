@@ -28,5 +28,4 @@ class Disconnect extends Component {
     );
   };
 };
-
 export default Disconnect;
