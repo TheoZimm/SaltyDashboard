@@ -23,10 +23,32 @@
 }
 
 .label-success {
-  background-color: #5cb85c;
+  background-color: #7CB342;
 }
 
 
 .grommetux-header .grommetux-search--inline .grommetux-search__input {
   background-color: #fff;
+}
+
+.status-open {
+  width: 40%;
+  padding: 5px;
+  text-align: center;
+  background-color: #7CB342;
+  font-weight: bold;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+}
+
+.status-close {
+  width: 40%;
+  padding: 5px;
+  text-align: center;
+  background-color: #F4511E;
+  font-weight: bold;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
 }
