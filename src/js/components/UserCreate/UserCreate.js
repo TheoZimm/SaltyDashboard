@@ -9,13 +9,13 @@ class UserCreate extends RoleAwareComponent {
     constructor(props) {
         super(props);
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
-        this.allowedRoles = ['admin', 'Project manager', 'Administrator'];
+        this.allowedRoles = ['admin', 'Administrator', 'Admin'];
 
         // Initialize state for the crud
         this.state = {
             username: '',
             password: '',
-            role: 'user'
+            role: 'Project Manager'
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,15 +39,18 @@ class UserCreate extends RoleAwareComponent {
             username: this.state.username,
             password: this.state.password,
             role:this.state.role
-        }).then(this.handleRedirect);
+        }).then(this.handleRedirect)
+             .catch(function (error) {
+               alert('this user is already in the database');
+            });
+                 
     }
      handleRedirect(res) {
         if (res.status == 200) {
+            alert('The user has been created');
             browserHistory.push('/UserManagement'); 
-        } else {
-                console.log('oups');
-            }
-        }
+        } 
+     }
     
 
     render() {
@@ -58,8 +61,8 @@ class UserCreate extends RoleAwareComponent {
             align='center'
             wrap={true}
             reverse={false}
-            pad='large'
-            margin='large'
+            pad='small'
+            margin='small'
             colorIndex='light-2'>
 
             <form onSubmit={this.handleSubmit}>

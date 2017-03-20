@@ -7,7 +7,7 @@ class Profile extends RoleAwareComponent {
   constructor(props) {
     super(props);
     this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
-    this.allowedRoles = ['user', 'utilisateur'];
+    this.allowedRoles = ['user', 'utilisateur', 'Project Manager', 'Project manager'];
 
   }
 

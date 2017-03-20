@@ -44,9 +44,9 @@ class DashboardLogin extends React.Component {
         localStorage.setItem('token', res.data);
         console.log(role);
 
-        if (res.status == 200 && role == 'user') {
+        if (res.status == 200 && role == 'user' || res.status == 200 && role == 'Project manager' || res.status == 200 && role == 'Project Manager') {
             browserHistory.push('/profile');
-        } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'administrator' || res.status == 200 && role == 'Administrator' || res.status == 200 && role == 'Project manager') {
+        } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'Admin' || res.status == 200 && role == 'administrator' || res.status == 200 && role == 'Administrator') {
             browserHistory.push('/userManagement');
         } else {
             if (res.status == 200) {

@@ -11,7 +11,7 @@ class UserManagement extends RoleAwareComponent {
   constructor(props) {
     super(props);
     this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
-    this.allowedRoles = ['administrator', 'Administrator', 'Admin', 'Project manager'];
+    this.allowedRoles = ['administrator', 'Administrator', 'Admin', 'admin'];
 
   }
 
@@ -20,7 +20,7 @@ class UserManagement extends RoleAwareComponent {
     const jsx = (
       <Box>
         <Header />
-        <Columns justify='center' size='medium'>
+        <Columns justify='center' size='large'>
           <UserCreate />
           <UsersList />
         </Columns>

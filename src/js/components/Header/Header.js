@@ -23,12 +23,12 @@ export default function AppHeader(props) {
         <Menu label="Label" inline={true} direction="row" flex="grow">
           <Anchor href="/">Welcome to SaltyApp</Anchor>
         </Menu>
-        {CurrentRole == 'user' ? (
+        {CurrentRole == 'user' || CurrentRole == 'Project manager' || CurrentRole == 'Project Manager' ? (
           <Box flex="grow" align="end">
             <Anchor href="/disconnect">disconnect & login </Anchor>
             <Anchor href="/profile">Logged as {CurrentRole}</Anchor>
           </Box>
-        ) : CurrentRole == 'admin' || CurrentRole == 'Project manager' || CurrentRole == 'Administrator' || CurrentRole == 'administrator' ? (
+        ) : CurrentRole == 'admin' || CurrentRole == 'Administrator' || CurrentRole == 'administrator' ? (
           <Box flex="grow" align="end">
             <Anchor href="/disconnect">disconnect & login </Anchor>
             <Anchor href="/userManagement">Logged as {CurrentRole}</Anchor>

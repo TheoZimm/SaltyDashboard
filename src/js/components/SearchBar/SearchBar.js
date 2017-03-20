@@ -26,12 +26,12 @@ class SearchBar extends React.Component {
 
 
     handleChangeTerms(e) {
-        this.setState({ searchTerms: searchTerms });
+        this.setState({ searchTerms: e });
         this.props.onTermsChange(e.target.value);
     }
 
     handleChangeTags(e) {
-        this.setState({tags: tempTags});
+        this.setState({tags: e});
         this.props.onClick(e.target.value);
     }
 

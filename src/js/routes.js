@@ -21,10 +21,10 @@ const routes = (
       <IndexRoute component={AppView} />
       <Route path="/login" component={Login} />
       <Route path="/disconnect" component={Disconnect} />
-      <Route authorize={['user']} component={UserArea}>
+      <Route authorize={['user', 'utilisateur', 'Project Manager', 'Project manager']} component={UserArea}>
         <Route path='/profile' component={Profile} />
       </Route>
-      <Route authorize={['admin', 'Project manager', 'Administrator', 'administrator']} component={AdminArea}>
+      <Route authorize={['admin', 'Administrator', 'administrator', 'Admin']} component={AdminArea}>
         <Route path='/userManagement' component={UserManagement} />
       </Route>
 
