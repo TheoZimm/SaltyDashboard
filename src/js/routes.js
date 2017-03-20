@@ -14,20 +14,18 @@ import UnAuthorized from './views/UnAuthorized/';
 const rootPath = '/';
 
 const routes = (
-  <Router history={browserHistory} >
-    <Route path={rootPath} component={App}>
-      <IndexRoute component={AppView} />
-      <Route path="/login" component={Login} />
-               <Route path="/details/:id" component={Details}/>
-      <Route path="/disconnect" component={Disconnect} />
-      <Route authorize={['user', 'utilisateur', 'Project Manager', 'Project manager']} component={UserArea}>
-        <Route path='/profile' component={Profile} />
-      </Route>
-      <Route authorize={['admin', 'Administrator', 'administrator', 'Admin']} component={AdminArea}>
-        <Route path='/userManagement' component={UserManagement} />
-      </Route>
-
-
+    <Router history={browserHistory}>
+        <Route path={rootPath} component={App}>
+            <IndexRoute component={AppView}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/details/:id" component={Details}/>
+            <Route path="/disconnect" component={Disconnect}/>
+            <Route authorize={['user', 'utilisateur', 'Project Manager', 'Project manager']} component={UserArea}>
+                <Route path='/profile' component={Profile}/>
+            </Route>
+            <Route authorize={['admin', 'Administrator', 'administrator', 'Admin']} component={AdminArea}>
+                <Route path='/userManagement' component={UserManagement}/>
+            </Route>
         </Route>
         <Route path="/unauthorized" component={UnAuthorized}/>
     </Router>
