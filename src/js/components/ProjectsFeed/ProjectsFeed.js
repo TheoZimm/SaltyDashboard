@@ -18,23 +18,23 @@ class ProjectsFeed extends React.Component {
 
 
     render() {
-        let { projects, searchTerms, searchTags, searchDate } = this.props;
+        let {projects, searchTerms, searchTags, searchDate} = this.props;
 
-        if(searchTerms) {
+        if (searchTerms) {
             projects = projects.filter(project => {
                 return project.title.toLowerCase().indexOf(searchTerms.toLowerCase()) >= 0 || project.description.toLowerCase().indexOf(searchTerms.toLowerCase()) >= 0;
             });
         }
 
-        if(searchTags.length) {
+        if (searchTags.length) {
             projects = projects.filter(project => {
                 return project.tags.filter(tag => {
-                   return searchTags.indexOf(tag) >= 0;
+                    return searchTags.indexOf(tag) >= 0;
                 }).length;
             });
         }
 
-        if(searchDate) {
+        if (searchDate) {
 
             let projectSearchDate = new Date(searchDate);
 
@@ -52,56 +52,57 @@ class ProjectsFeed extends React.Component {
 
             return (
 
-            <Box>
-                <Box><Label>Projet(s) : {projects.length}</Label></Box>
+                <Box>
+                    <Box><Label>Projet(s) : {projects.length}</Label></Box>
 
-                <Columns masonry={false}
-                         size='medium'>
+                    <Columns masonry={false}
+                             size='medium'>
 
 
+                        {projects.map((project) => {
+                            return (
+                                <Box key={project.title} align='center'
+                                     pad='medium'
+                                     margin='small'
+                                     colorIndex='light-2'
+                                     className="max-height">
+                                    <Card
+                                        heading={project.title}
+                                        description={project.description}
+                                        link={<Anchor href={'/details/' + project.id} label='More info'/>}
+                                    />
 
-                    {projects.map((project) => {
-                        return (
-                            <Box key={project.title} align='center'
-                                 pad='medium'
-                                 margin='small'
-                                 colorIndex='light-2'>
-                                <Card
-                                    heading={project.title}
-                                    description={project.description}
-                                    link={<Anchor href='#' label='Détails'/>}
-                                />
-
-                                <Columns masonry={true}
-                                         size='medium'>
-                                    <Box align='left'
-                                         pad='small'
-                                         margin='small'
-                                         colorIndex='light-2'>
-                                        <div className="align-left">
-                                            <DeliverIcon /> <Timestamp value={project.deadline} fields='date'/>
-                                            <br/>
-                                            <UserManagerIcon /> {project.projectManager.firstname} {project.projectManager.lastname}
-                                            <br/>
-                                            <UserIcon /> {project.nbWorker}
-                                        </div>
-                                    </Box>
-                                    <Box align='left'
-                                         pad='small'
-                                         margin='small'
-                                         colorIndex='light-2'>
-                                        {project.tags.map((tag) => {
-                                            return <div className="label label-success">{tag}</div>;
-                                        })}
-                                    </Box>
-                                </Columns>
-                            </Box>
-                        );
-                    })
-                    }
-
-                </Columns>
-            </Box>
+                                    <Columns masonry={true}
+                                             size='medium'>
+                                        <Box align='left'
+                                             pad='small'
+                                             margin='small'
+                                             colorIndex='light-2'>
+                                            <div className="align-left">
+                                                <DeliverIcon /> <Timestamp value={project.deadline} fields='date'/>
+                                                <br/>
+                                                <UserManagerIcon /> {project.projectManager.firstname} {project.projectManager.lastname}
+                                                <br/>
+                                                <UserIcon /> {project.nbWorker}
+                                            </div>
+                                        </Box>
+                                        <Box align='left'
+                                             pad='none'
+                                             size='xsmall'
+                                             wrap="true"
+                                             margin='none'
+                                             colorIndex='light-2'>
+                                            {project.tags.map((tag) => {
+                                                return <div className="label label-success">{tag}</div>;
+                                            })}
+                                        </Box>
+                                    </Columns>
+                                </Box>
+                            );
+                        })
+                        }
+                    </Columns>
+                </Box>
             );
         } else {
             return (

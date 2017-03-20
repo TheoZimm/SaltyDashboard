@@ -3,13 +3,8 @@ import Box from 'grommet/components/Box';
 import { RoleAwareComponent } from 'react-router-role-authorization';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
-
 import Heading from 'grommet/components/Heading';
-
-import Button from 'grommet/components/Button';
 import axios from 'axios';
-import EditIcon from 'grommet/components/icons/base/Edit';
-import FormCloseIcon from 'grommet/components/icons/base/FormClose';
 class UsersList extends RoleAwareComponent {
 
     constructor(props) {

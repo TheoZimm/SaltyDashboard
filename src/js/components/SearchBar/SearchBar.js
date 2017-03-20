@@ -66,7 +66,7 @@ class SearchBar extends React.Component {
                     splash={false}
                     colorIndex='light-2'>
                 <Title>
-                    Recherche
+                    Search
                 </Title>
                 <Box flex={true}
                      justify='end'
@@ -76,7 +76,7 @@ class SearchBar extends React.Component {
                     <Search inline={true}
                             fill={true}
                             size='medium'
-                            placeHolder='Titre / Description'
+                            placeHolder='Title / Summary'
                             onDOMChange={this.handleChangeTerms}
                             dropAlign={{"right": "right"}}/>
 

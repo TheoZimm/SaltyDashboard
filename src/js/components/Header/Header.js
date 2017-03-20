@@ -28,7 +28,7 @@ export default function AppHeader(props) {
             <Anchor href="/disconnect">disconnect & login </Anchor>
             <Anchor href="/profile">Logged as {CurrentRole}</Anchor>
           </Box>
-        ) : CurrentRole == 'admin' || CurrentRole == 'Administrator' || CurrentRole == 'administrator' ? (
+        ) : CurrentRole == 'admin' || CurrentRole == 'Administrator' || CurrentRole == 'administrator' || CurrentRole == 'Admin' ? (
           <Box flex="grow" align="end">
             <Anchor href="/disconnect">disconnect & login </Anchor>
             <Anchor href="/userManagement">Logged as {CurrentRole}</Anchor>
