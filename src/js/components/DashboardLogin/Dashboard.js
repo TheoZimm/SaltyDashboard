@@ -42,54 +42,56 @@ class DashboardLogin extends React.Component {
         const role = decodeToken.role;
         localStorage.setItem('user', JSON.stringify(decodeToken));
         localStorage.setItem('token', res.data);
-        console.log(role);
-
-        if (res.status == 200 && role == 'user' || res.status == 200 && role == 'Project manager' || res.status == 200 && role == 'Project Manager') {
+        if (res.status == 401) {
+ alert('Wrong password or your account does not exist');
+            console.log('oups');
+        }
+        else if (res.status == 200 && role == 'user' || res.status == 200 && role == 'Project manager' || res.status == 200 && role == 'Project Manager') {
             browserHistory.push('/profile');
         } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'Admin' || res.status == 200 && role == 'administrator' || res.status == 200 && role == 'Administrator') {
             browserHistory.push('/userManagement');
-        } else {
+
+        }
+        else {
             if (res.status == 200) {
                 browserHistory.push('/profile');
-            } else {
-                console.log('oups');
             }
         }
     }
 
-        render() {
-            return (
-                <Box direction='row'
-                    justify='center'
-                    align='center'
-                    pad='medium'
-                    margin='small'
-                    colorIndex='light-1'>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Login:
+    render() {
+        return (
+            <Box direction='row'
+                justify='center'
+                align='center'
+                pad='medium'
+                margin='small'
+                colorIndex='light-1'>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Login:
                         <input
-                                name="login"
-                                type="text"
-                                required
-                                onChange={this.handleChange}
-                                value={this.state.login} />
-                        </label>
-                        <br />
-                        <label>
-                            Password:
+                            name="login"
+                            type="text"
+                            required
+                            onChange={this.handleChange}
+                            value={this.state.login} />
+                    </label>
+                    <br />
+                    <label>
+                        Password:
                         <input
-                                name="password"
-                                type="password"
-                                required
-                                onChange={this.handleChange}
-                                value={this.state.password} />
-                        </label>
+                            name="password"
+                            type="password"
+                            required
+                            onChange={this.handleChange}
+                            value={this.state.password} />
+                    </label>
 
-                        <input type="submit" value="Login" />
-                    </form>
-                </Box>
-            );
-        };
+                    <input type="submit" value="Login" />
+                </form>
+            </Box>
+        );
     };
-    export default DashboardLogin;
+};
+export default DashboardLogin;

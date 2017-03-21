@@ -3,11 +3,12 @@ import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 import Menu from 'grommet/components/Menu';
+import AddIcon from 'grommet/components/icons/base/Add';
 
 export default function AppHeader(props) {
 
   var CurrentRole = '';
-  
+
   if (localStorage.getItem('user') !== null) {
     CurrentRole = JSON.parse(localStorage.getItem('user')).role;
   } else {
@@ -16,6 +17,7 @@ export default function AppHeader(props) {
 
   return (
     <Header justify="center" colorIndex="neutral-4">
+    
       <Box size={{ width: { max: 'xxlarge' } }} direction="row"
         responsive={false} justify="start" align="center"
         pad={{ horizontal: 'medium' }} flex="grow">
@@ -30,9 +32,20 @@ export default function AppHeader(props) {
           </Box>
         ) : CurrentRole == 'admin' || CurrentRole == 'Administrator' || CurrentRole == 'administrator' || CurrentRole == 'Admin' ? (
           <Box flex="grow" align="end">
+          <Box>
+                       <Anchor href="/userManagement">Logged as {CurrentRole}</Anchor>
+                       </Box>
+          <Menu icon={<AddIcon />}
+            dropAlign={{ "right": "right", "top": "top" }}>
             <Anchor href="/disconnect">disconnect & login </Anchor>
-            <Anchor href="/userManagement">Logged as {CurrentRole}</Anchor>
+         
+            <Anchor href='/ProjectsManagement'>
+              Display projects List
+      </Anchor>
+          </Menu>
+
           </Box>
+
         ) : (
               <Box flex="grow" align="end">
                 <Anchor href="/login">Login</Anchor>

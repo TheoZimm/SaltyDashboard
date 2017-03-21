@@ -43,9 +43,9 @@ class UsersList extends RoleAwareComponent {
                     pad='small'
                     margin='small'
                     colorIndex='light-2'>
-                       <Heading>List of project managers</Heading>
+                    <Heading>List of project managers</Heading>
                     <Table>
- 
+
                         <thead>
                             <tr>
                                 <th>
@@ -69,6 +69,8 @@ class UsersList extends RoleAwareComponent {
                                             </td>
                                         </TableRow>
                                     );
+                                } else {
+                                    return console.log('oui');
                                 }
                             })}
                         </tbody>

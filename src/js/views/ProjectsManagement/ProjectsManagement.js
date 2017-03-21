@@ -1,12 +1,10 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
-import Columns from 'grommet/components/Columns';
 import Header from '../../components/Header/';
 import { RoleAwareComponent } from 'react-router-role-authorization';
-import UsersList from '../../components/UsersList';
-import UserCreate from '../../components/UserCreate';
+import ProjectsList from '../../components/ProjectsList/';
 
-class UserManagement extends RoleAwareComponent {
+class ProjectsManagement extends RoleAwareComponent {
 
   constructor(props) {
     super(props);
@@ -20,13 +18,10 @@ class UserManagement extends RoleAwareComponent {
     const jsx = (
       <Box>
         <Header />
-        <Columns justify='center' size='medium'>
-          <UserCreate />
-          <UsersList />
-        </Columns>
+         <ProjectsList/>
       </Box>
         );
     return this.rolesMatched() ? jsx : null;
   }
 };
-export default UserManagement;
+export default ProjectsManagement;
