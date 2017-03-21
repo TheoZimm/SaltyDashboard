@@ -45,14 +45,11 @@ class DashboardLogin extends React.Component {
         if (res.status == 401) {
  alert('Wrong password or your account does not exist');
             console.log('oups');
-        }
-        else if (res.status == 200 && role == 'user' || res.status == 200 && role == 'Project manager' || res.status == 200 && role == 'Project Manager') {
+        } else if (res.status == 200 && role == 'user' || res.status == 200 && role == 'Project manager' || res.status == 200 && role == 'Project Manager') {
             browserHistory.push('/profile');
         } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'Admin' || res.status == 200 && role == 'administrator' || res.status == 200 && role == 'Administrator') {
             browserHistory.push('/userManagement');
-
-        }
-        else {
+        } else {
             if (res.status == 200) {
                 browserHistory.push('/profile');
             }

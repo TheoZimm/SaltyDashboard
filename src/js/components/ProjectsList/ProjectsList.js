@@ -7,7 +7,6 @@ import Heading from 'grommet/components/Heading';
 import axios from 'axios';
 import FormTrashIcon from 'grommet/components/icons/base/FormTrash';
 import Button from 'grommet/components/Button';
-import Toast from 'grommet/components/Toast';
 class ProjectsList extends RoleAwareComponent {
 
     constructor(props) {
@@ -40,7 +39,7 @@ class ProjectsList extends RoleAwareComponent {
                 alert('The project has been deleted');
 
                 return this.setState(s => ({
-                    projects: s.projects.filter(p => p.id !== projectid),
+                    projects: s.projects.filter(p => p.id !== projectid)
                 }));
 
 
@@ -50,9 +49,9 @@ class ProjectsList extends RoleAwareComponent {
     deleteProjects() {
         axios.delete('http://localhost:23000/api/projects/')
             .then((response) => {
-                alert(' What have you done ???')
+                alert(' What have you done ???');
                 return this.setState({
-                    projects: [],
+                    projects: []
                 });
             });
     }
