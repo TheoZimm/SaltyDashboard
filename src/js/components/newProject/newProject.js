@@ -31,10 +31,6 @@ class NewProject extends RoleAwareComponent {
                 </FormField>
             </Form>
         </Box>
-
-
-
-
         );
     }
 }

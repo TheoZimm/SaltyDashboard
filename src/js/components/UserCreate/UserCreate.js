@@ -21,7 +21,7 @@ class UserCreate extends RoleAwareComponent {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    
+
     handleChange(event) {
 
         const target = event.target;
@@ -33,64 +33,66 @@ class UserCreate extends RoleAwareComponent {
         });
     }
 
-        handleSubmit(e) {
+    handleSubmit(e) {
         e.preventDefault();
         axios.post('http://localhost:23000/api/user', {
             username: this.state.username,
             password: this.state.password,
-            role:this.state.role
-        }).then(this.handleRedirect)
-             .catch(function (error) {
-               alert('this user is already in the database');
-            });
-                 
+            role: this.state.role
+        })
+            .catch(function (error) {
+                alert('this user is already in the database');
+            }).then(this.handleRedirect);
+
     }
-     handleRedirect(res) {
+    handleRedirect(res) {
         if (res.status == 200) {
             alert('The user has been created');
-            browserHistory.push('/UserManagement'); 
-        } 
-     }
-    
+            browserHistory.push('/UserManagement');
+        } else {
+            alert('an error occured and the user has not been created');
+        }
+    }
+
 
     render() {
 
         const jsx = (
-                               <Box direction='row'
-            justify='start'
-            align='center'
-            wrap={true}
-            reverse={false}
-            pad='small'
-            margin='small'
-            colorIndex='light-2'>
+            <Box direction='row'
+                justify='start'
+                align='center'
+                wrap={true}
+                reverse={false}
+                pad='small'
+                margin='small'
+                colorIndex='light-2'>
 
-            <form onSubmit={this.handleSubmit}>
-              <Heading>
-               Create a new user
+                <form onSubmit={this.handleSubmit}>
+                    <Heading>
+                        Create a new Project Manager
     </Heading>
-<label>
-                            Username:
+                    <label>
+                        Username:
                         <input
-                                name="username"
-                                type="text"
-                                required
-                                onChange={this.handleChange}
-                                value={this.state.username} />
-                        </label>
-                        <br />
-                        <label>
-                            Password:
+                            name="username"
+                            type="text"
+                            required
+                            onChange={this.handleChange}
+                            value={this.state.username} />
+                    </label>
+                    <br />
+                    <label>
+                        Password:
                         <input
-                                name="password"
-                                type="password"
-                                required
-                                onChange={this.handleChange}
-                                value={this.state.password} />
-                        </label>
-                 <input type="submit" value="Create" />
-            </form>
-          </Box>
+                            name="password"
+                            type="password"
+                            required
+                            onChange={this.handleChange}
+                            value={this.state.password} />
+                    </label>
+                    <input type="submit" value="Create" />
+                </form>
+            </Box>
         );
         return this.rolesMatched() ? jsx : null;
     }

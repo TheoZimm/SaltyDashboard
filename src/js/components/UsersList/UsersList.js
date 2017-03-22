@@ -37,13 +37,13 @@ class UsersList extends RoleAwareComponent {
         if (users.length) {
             return (
                 <Box direction='row'
-                     justify='start'
-                     align='center'
-                     wrap={true}
-                     reverse={false}
-                     pad='small'
-                     margin='small'
-                     colorIndex='light-2'>
+                    justify='start'
+                    align='center'
+                    wrap={true}
+                    reverse={false}
+                    pad='small'
+                    margin='small'
+                    colorIndex='light-2'>
                     <Heading>List of project managers</Heading>
                     <Table>
 
@@ -58,22 +58,22 @@ class UsersList extends RoleAwareComponent {
                         </tr>
                         </thead>
                         <tbody>
-                        {users.map((user) => {
-                            if (user.role == 'Project Manager' || user.role == 'Project manager') {
-                                return (
-                                    <TableRow>
-                                        <td key={user.username}>
-                                            {user.username}
-                                        </td>
-                                        <td className='secondary'>
-                                            {user.role}
-                                        </td>
-                                    </TableRow>
-                                );
-                            } else {
-                                return ("");
-                            }
-                        })}
+                            {users.map((user) => {
+                                if (user.role == 'Project Manager' || user.role == 'Project manager') {
+                                    return (
+                                        <TableRow>
+                                            <td key={user.username}>
+                                                {user.username}
+                                            </td>
+                                            <td className='secondary'>
+                                                {user.role}
+                                            </td>
+                                        </TableRow>
+                                    );
+                                } else {
+                                    return console.log('oui');
+                                }
+                            })}
                         </tbody>
                     </Table>
                 </Box>
