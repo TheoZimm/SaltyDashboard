@@ -5,31 +5,38 @@ import Heading from 'grommet/components/Heading';
 import FormField from 'grommet/components/FormField';
 import Form from 'grommet/components/Form';
 import Box from 'grommet/components/Box';
+import TextInput from 'grommet/components/TextInput';
 
 
-class Profile extends RoleAwareComponent {
+class NewProject extends RoleAwareComponent {
 
     constructor(props) {
         super(props);
-        console.log("Bonjour");
-
     }
 
     render() {
         return (
-        <Form>
+
+        <Box>
             <Header>
                 <Heading>
-                    Sample Header
+                    New project
                 </Heading>
             </Header>
-            <FormField>
-                <TextInput />
-            </FormField>
-        </Form>
+            <Form>
+                <FormField>
+                    <TextInput id='title'
+                               name='title'
+                                placeHolder='Title'/>
+                </FormField>
+            </Form>
+        </Box>
+
+
+
 
         );
     }
 }
 ;
-export default Profile;
+export default NewProject;

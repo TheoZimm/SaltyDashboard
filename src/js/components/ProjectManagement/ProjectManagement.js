@@ -9,7 +9,7 @@ import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Layer from 'grommet/components/Layer';
-import newProject from '../newProject';
+import NewProject from '../NewProject';
 
 class ProjectManagement extends React.Component {
 
@@ -34,7 +34,7 @@ class ProjectManagement extends React.Component {
 
     render() {
         if (this.props.projects.length > 0) {
-
+            console.log(this.state.layer);
             return (
 
                 <Box pad="medium">
@@ -42,7 +42,7 @@ class ProjectManagement extends React.Component {
                     <Layer closer={true}
                            flush={false}
                            hidden={this.state.layer}>
-                        <newProject />
+                            <NewProject />
                     </Layer>
 
                     <Heading>
