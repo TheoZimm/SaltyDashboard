@@ -78,7 +78,7 @@ class ProjectManagement extends React.Component {
                         {this.props.projects.map((project) => {
 
                             return (
-                                <TableRow>
+                                <TableRow key={project.id}>
                                     <td>
                                         {project.title}
                                     </td>

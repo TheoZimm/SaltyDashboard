@@ -53,16 +53,16 @@ class ProjectsFeed extends React.Component {
             return (
 
                 <Box>
-                    <Box><Label>Projet(s) : {projects.length}</Label></Box>
+                    <Box><Label>Nombre de projet(s) : {projects.length}</Label></Box>
 
                     <Columns masonry={false}
-                             size='medium'>
+                             size='small'>
 
 
                         {projects.map((project) => {
                             return (
-                                <Box key={project.title} align='center'
-                                     pad='medium'
+                                <Box key={project.title}
+                                     pad='small'
                                      margin='small'
                                      colorIndex='light-2'
                                      className="max-height">
@@ -74,7 +74,7 @@ class ProjectsFeed extends React.Component {
 
                                     <Columns masonry={true}
                                              size='medium'>
-                                        <Box align='left'
+                                        <Box
                                              pad='small'
                                              margin='small'
                                              colorIndex='light-2'>
@@ -86,14 +86,14 @@ class ProjectsFeed extends React.Component {
                                                 <UserIcon /> {project.nbWorker}
                                             </div>
                                         </Box>
-                                        <Box align='left'
+                                        <Box 
                                              pad='none'
                                              size='xsmall'
-                                             wrap="true"
+                                             wrap={true} 
                                              margin='none'
                                              colorIndex='light-2'>
                                             {project.tags.map((tag) => {
-                                                return <div className="label label-success">{tag}</div>;
+                                                return <div key={project.tags.id} className="label label-success">{tag}</div>;
                                             })}
                                         </Box>
                                     </Columns>
