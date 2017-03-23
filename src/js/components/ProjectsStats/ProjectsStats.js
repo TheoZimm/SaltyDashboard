@@ -1,6 +1,10 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
 import Legend from 'grommet/components/Legend';
+import AnnotatedMeter from 'grommet-addons/components/AnnotatedMeter';
+import Heading from 'grommet/components/Heading';
+
+
 
 
 class ProjectsStats extends React.Component {
@@ -12,9 +16,79 @@ class ProjectsStats extends React.Component {
 
     render() {
         let { projects } = this.props;
-        let tags = projects.reduce((a, p) => [ ...a, ...p.tags ], []);
-        const sortedTags = tags.filter((v, i, a) => a.indexOf(v) === i); 
-        console.log(sortedTags);
+
+        // Occurence algorithm
+        const occurence = function (array) {
+            let result = {};
+
+            if (array instanceof Array) {
+                array.forEach(function (v, i) {
+                    if (!result[v]) {
+                        result[v] = [i];
+                    } else {
+                        result[v].push(i);
+                    }
+                });
+                Object.keys(result).forEach(function (v) {
+                    result[v] = { "index": result[v], "length": result[v].length };
+                });
+            }
+            return result;
+        };
+
+
+        // TAGS
+        let tags = projects.reduce((a, p) => [...a, ...p.tags], []);
+        // Sorted tags
+        let tagsOccurences = occurence(tags);
+        //let sortedTags = [];
+
+        //if ([tagsOccurences].length) {
+
+            let tagsIndices = Object.keys(tagsOccurences);
+            let tagsIndice = tagsIndices[0]
+
+            let sortedTags = [];
+            tagsIndices.map((tagsIndice) => {
+                sortedTags.push({name:tagsIndice, amount:tagsOccurences[tagsIndice].length})  
+            });
+
+            let finalTags = [];
+            sortedTags.map((tag,i) => {
+                finalTags.push({"label": tag.name, "value": tag.amount, "colorIndex": "graph-1" });
+            });
+
+             //console.log(sortedTags);
+        //}
+
+
+        // PM
+
+        let projectManagers = [];
+        projects.map((project) => {
+            projectManagers.push(project.projectManager.username);
+        });
+
+ 
+        let pmOccurences = occurence(projectManagers);
+
+       let pmsIndices = Object.keys(pmOccurences);
+            let pmsIndice = pmsIndices[0]
+
+            let sortedPms= [];
+            pmsIndices.map((pmsIndice) => {
+                sortedPms.push({name:pmsIndice, amount:pmOccurences[pmsIndice].length})  
+            });
+
+            let finalPms = [];
+            sortedPms.map((pm,i) => {
+                finalPms.push({"label": pm.name, "value": pm.amount, "colorIndex": "graph-"+i });
+            });
+
+
+
+
+
         if (projects.length) {
 
             ////////////////////////////////////////
@@ -26,10 +100,25 @@ class ProjectsStats extends React.Component {
                     margin='small'
                     colorIndex='light-1'
                     className="max-height">
-                    <Legend series={[{ "label": "Americas", "value": 40, "colorIndex": "graph-1" }, { "label": "Europe", "value": 20, "colorIndex": "unset" }, { "label": "Asia", "value": 15, "colorIndex": "graph-3" }]}
-                        onClick={false}
-                        total={true}
-                        size='medium' />
+                    <Heading>Amount of projects with those tags :</Heading>
+                    <Box pad='small'
+                        colorIndex='light-2'
+                        margin='small'>
+                        <Legend series={finalTags}
+                            onClick={false}
+                            total={true}
+                            size='medium' />
+                    </Box >
+                     <Heading>Projects by managers</Heading>
+                    <Box pad='small'
+                        align='center'
+                        colorIndex='light-2'
+                        margin='small'>
+                        <AnnotatedMeter type='circle'
+                            size='medium'
+                            series={finalPms}
+                            legend={true} />
+                    </Box>
                 </Box>
             );
         } else {

@@ -64,7 +64,7 @@ class Home extends React.Component {
                             searchDate={this.state.date}
                             projects={this.props.projects} />
                     </Box>
-                    <Box colorIndex='light-2'
+                    <Box colorIndex='light-1'
                         pad='small'>
                         <ProjectsStats
                             projects={this.props.projects} />
