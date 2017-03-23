@@ -92,9 +92,11 @@ class ProjectsFeed extends React.Component {
                                              wrap={true} 
                                              margin='none'
                                              colorIndex='light-2'>
+                                             <ul className="ui">
                                             {project.tags.map((tag) => {
-                                                return <div key={project.tags.id} className="label label-success">{tag}</div>;
+                                                return <li key={project.tags.id} className="label label-success">{tag}</li>;
                                             })}
+                                            </ul>
                                         </Box>
                                     </Columns>
                                 </Box>

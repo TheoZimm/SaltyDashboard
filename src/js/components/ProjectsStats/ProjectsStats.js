@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import Box from 'grommet/components/Box';
 import Legend from 'grommet/components/Legend';
@@ -39,11 +40,7 @@ class ProjectsStats extends React.Component {
 
         // TAGS
         let tags = projects.reduce((a, p) => [...a, ...p.tags], []);
-        // Sorted tags
         let tagsOccurences = occurence(tags);
-        //let sortedTags = [];
-
-        //if ([tagsOccurences].length) {
 
             let tagsIndices = Object.keys(tagsOccurences);
             let tagsIndice = tagsIndices[0]
@@ -55,12 +52,8 @@ class ProjectsStats extends React.Component {
 
             let finalTags = [];
             sortedTags.map((tag,i) => {
-                finalTags.push({"label": tag.name, "value": tag.amount, "colorIndex": "graph-1" });
+                finalTags.push({"label": tag.name, "value": tag.amount, "colorIndex": "graph-"+i });
             });
-
-             //console.log(sortedTags);
-        //}
-
 
         // PM
 
