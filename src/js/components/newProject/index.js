@@ -1,2 +1,2 @@
-import newProject from './newProject';
-export default newProject;
+import NewProject from './NewProject';
+export default NewProject;
