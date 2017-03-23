@@ -41,7 +41,7 @@ class ProjectsStats extends React.Component {
         // TAGS
         let tags = projects.reduce((a, p) => [...a, ...p.tags], []);
         let tagsOccurences = occurence(tags);
-
+        console.log(tagsOccurences);
             let tagsIndices = Object.keys(tagsOccurences);
             let tagsIndice = tagsIndices[0]
 
@@ -105,7 +105,7 @@ class ProjectsStats extends React.Component {
                      <Heading>Projects by managers</Heading>
                     <Box pad='small'
                         align='center'
-                        colorIndex='light-2'
+                        colorIndex='light-1'
                         margin='small'>
                         <AnnotatedMeter type='circle'
                             size='medium'

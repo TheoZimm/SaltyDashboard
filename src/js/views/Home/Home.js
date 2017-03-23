@@ -49,8 +49,10 @@ class Home extends React.Component {
     render() {
         return (
             <Box>
-                <Header />
+                <Header
+                fixed='true' />
                 <SearchBar
+                fixed='true'
                     onTermsChange={this.handleChangeTerms}
                     onClick={this.handleChangeTags}
                     onDateChange={this.handleChangeDate}
