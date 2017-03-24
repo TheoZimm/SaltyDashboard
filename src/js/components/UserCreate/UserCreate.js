@@ -13,6 +13,8 @@ class UserCreate extends RoleAwareComponent {
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['admin', 'Administrator', 'Admin'];
 
+        this.rendering = this.props.syncRendering;
+
 
         // Initialize state for the crud
         this.state = {
@@ -25,6 +27,7 @@ class UserCreate extends RoleAwareComponent {
         // Bind event on form
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
     }
 
 
@@ -56,6 +59,8 @@ class UserCreate extends RoleAwareComponent {
     }
 
     handleRedirect(res) {
+
+        this.rendering.render();
 
         // Request succeed push to UserManagement view
         if (res.status == 200) {

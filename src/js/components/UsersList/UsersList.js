@@ -14,6 +14,10 @@ class UsersList extends RoleAwareComponent {
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['admin', 'Administrator'];
 
+        // Bind this rendering to corresponding props
+        this.rendering = this.props.syncRendering;
+        this.loadUser = this.loadUser.bind(this);
+
         // Define states
         this.state = {
             users: ''
@@ -21,10 +25,16 @@ class UsersList extends RoleAwareComponent {
 
     }
 
+    // When component is mounting get sync render (via subscribe method from utils)
     componentDidMount() {
+        this.rendering.subscribe(this.loadUser);
+        this.loadUser();
+    }
+
+    // Get all users
+    loadUser() {
         var self = this;
 
-        // Get all users
         axios.get('http://localhost:23000/api/users')
             .then(function (response) {
                 self.setState({
@@ -58,8 +68,10 @@ class UsersList extends RoleAwareComponent {
                             <th>
                                 Name
                             </th>
+
                             <th>
                                 Role
+
                             </th>
                         </tr>
                         </thead>
@@ -82,6 +94,7 @@ class UsersList extends RoleAwareComponent {
                                 return "";
                             }
                         })}
+
                         </tbody>
                     </Table>
                 </Box>

@@ -16,7 +16,9 @@ class ProjectsStats extends React.Component {
     render() {
         let {projects} = this.props;
 
-        // Count number of occurence in array for Grommet graphs
+
+        // Occurence algorithm
+        // Take an array and sort each value and length of it
         const occurence = function (array) {
             let result = {};
 
@@ -37,8 +39,13 @@ class ProjectsStats extends React.Component {
         //////////////////////////////////////////////////////////////////////////////////////
 
 
-        // Graph by tags
+        // ****************
+        // TAGS retrieval
+        // ****************
+        // Retrieve all tags from each project
         let tags = projects.reduce((a, p) => [...a, ...p.tags], []);
+
+        // Retrieve each tags occurence (no more duplicated value)
         let tagsOccurences = occurence(tags);
         let tagsIndices = Object.keys(tagsOccurences);
         let tagsIndice = tagsIndices[0];
@@ -55,7 +62,27 @@ class ProjectsStats extends React.Component {
         //////////////////////////////////////////////////////////////////////////////////////
 
 
-        // Graph by project manager
+        let tagsIndices = Object.keys(tagsOccurences);
+        let tagsIndice = tagsIndices[0];
+
+        let sortedTags = [];
+
+        // Transform all tags occurence into a manually formated array (easier to use)
+        tagsIndices.map((tagsIndice) => {
+            sortedTags.push({name: tagsIndice, amount: tagsOccurences[tagsIndice].length})
+        });
+
+        // Loop to get the correct array that Grommet wants
+        let finalTags = [];
+        sortedTags.map((tag, i) => {
+            finalTags.push({"label": tag.name, "value": tag.amount, "colorIndex": "graph-" + i});
+        });
+
+        // ****************
+        // ProjectManagers retrieval 
+        // ****************
+        // Same logic as above
+
         let projectManagers = [];
         projects.map((project) => {
             projectManagers.push(project.projectManager.username);
@@ -71,9 +98,13 @@ class ProjectsStats extends React.Component {
         });
 
         let finalPms = [];
+        let arrayswag = [];
         sortedPms.map((pm, i) => {
-            finalPms.push({"label": pm.name, "value": pm.amount, "colorIndex": "graph-" + i});
+
+            finalPms.push({"label": pm.name, "value": pm.amount, "colorIndex": "graph-" + (i + 1)});
+
         });
+
         //////////////////////////////////////////////////////////////////////////////////////
 
 

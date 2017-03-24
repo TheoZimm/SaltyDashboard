@@ -32,12 +32,15 @@ class DashboardLogin extends React.Component {
         });
     }
 
+
     // Submit info to server
     handleSubmit(e) {
         e.preventDefault();
         axios.post('http://localhost:23000/api/auth', {
             username: this.state.login,
             password: this.state.password
+        }).catch(function (error) {
+            alert('wrong login or password');
         }).then(this.handleRedirect);
     }
 
@@ -53,6 +56,7 @@ class DashboardLogin extends React.Component {
 
         // Wrong password or login
         if (res.status == 401) {
+
             alert('Wrong password or your account does not exist');
 
             // If project manager

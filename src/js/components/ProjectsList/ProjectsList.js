@@ -67,7 +67,6 @@ class ProjectsList extends RoleAwareComponent {
     render() {
         let projects = this.state.projects;
 
-
         // Did we have projects ?
         if (projects.length) {
             return (
@@ -124,9 +123,7 @@ class ProjectsList extends RoleAwareComponent {
                                     </td>
                                 </TableRow>
                             );
-
                         })}
-
                         </tbody>
                     </Table>
                 </Box>

@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
@@ -46,6 +47,7 @@ export default function AppHeader(props) {
 
                     </Box>
 
+<<<<<<< HEAD
                 ) : (
                     <Box flex="grow" align="end">
                         <Anchor href="/login">Login</Anchor>
@@ -55,3 +57,6 @@ export default function AppHeader(props) {
         </Header>
     );
 };
+=======
+*/
+

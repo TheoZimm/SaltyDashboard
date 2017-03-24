@@ -5,8 +5,10 @@ import Header from '../../components/Header/';
 import {RoleAwareComponent} from 'react-router-role-authorization';
 import UsersList from '../../components/UsersList';
 import UserCreate from '../../components/UserCreate';
+import UsersListRender from '../../../utils/UsersListRender';
 
 class UserManagement extends RoleAwareComponent {
+
 
     constructor(props) {
         super(props);
@@ -15,7 +17,10 @@ class UserManagement extends RoleAwareComponent {
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['administrator', 'Administrator', 'Admin', 'admin'];
 
+        // Observer, allows sync rendering between component in the admin area
+        this.UsersListRender = new UsersListRender();
     }
+
 
     render() {
 
@@ -23,8 +28,8 @@ class UserManagement extends RoleAwareComponent {
             <Box>
                 <Header />
                 <Columns justify='center' size='medium'>
-                    <UserCreate />
-                    <UsersList />
+                    <UserCreate syncRendering={this.UsersListRender}/>
+                    <UsersList syncRendering={this.UsersListRender}/>
                 </Columns>
             </Box>
         );
