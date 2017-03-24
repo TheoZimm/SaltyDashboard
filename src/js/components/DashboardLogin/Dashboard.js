@@ -28,12 +28,13 @@ class DashboardLogin extends React.Component {
     }
 
 
-
     handleSubmit(e) {
         e.preventDefault();
         axios.post('http://localhost:23000/api/auth', {
             username: this.state.login,
             password: this.state.password
+        }).catch(function(error) {
+            alert('wrong login or password')
         }).then(this.handleRedirect);
     }
 
@@ -43,8 +44,7 @@ class DashboardLogin extends React.Component {
         localStorage.setItem('user', JSON.stringify(decodeToken));
         localStorage.setItem('token', res.data);
         if (res.status == 401) {
- alert('Wrong password or your account does not exist');
-            console.log('oups');
+        alert('an Error occured');
         } else if (res.status == 200 && role == 'user' || res.status == 200 && role == 'Project manager' || res.status == 200 && role == 'Project Manager') {
             browserHistory.push('/profile');
         } else if (res.status == 200 && role == 'admin' || res.status == 200 && role == 'Admin' || res.status == 200 && role == 'administrator' || res.status == 200 && role == 'Administrator') {

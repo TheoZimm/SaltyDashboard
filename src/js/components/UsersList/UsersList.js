@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
-import {RoleAwareComponent} from 'react-router-role-authorization';
+import { RoleAwareComponent } from 'react-router-role-authorization';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
 import Heading from 'grommet/components/Heading';
@@ -11,6 +11,8 @@ class UsersList extends RoleAwareComponent {
         super(props);
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['admin', 'Administrator'];
+        this.rendering = this.props.syncRendering;
+        this.loadUser = this.loadUser.bind(this);
         this.state = {
             users: ''
         };
@@ -18,8 +20,12 @@ class UsersList extends RoleAwareComponent {
     }
 
     componentDidMount() {
-        var self = this;
+        this.rendering.subscribe(this.loadUser);
+        this.loadUser();
+    }
 
+    loadUser() {
+        var self = this;
         axios.get('http://localhost:23000/api/users')
             .then(function (response) {
                 self.setState({
@@ -48,14 +54,14 @@ class UsersList extends RoleAwareComponent {
                     <Table>
 
                         <thead>
-                        <tr>
-                            <th>
-                                Name
+                            <tr>
+                                <th>
+                                    Name
                             </th>
-                            <th>
-                                role
+                                <th>
+                                    role
                             </th>
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody>
                             {users.map((user) => {
@@ -81,13 +87,13 @@ class UsersList extends RoleAwareComponent {
         } else {
             return (
                 <Box direction='row'
-                     justify='start'
-                     align='center'
-                     wrap={true}
-                     reverse={false}
-                     pad='large'
-                     margin='large'
-                     colorIndex='light-2'>
+                    justify='start'
+                    align='center'
+                    wrap={true}
+                    reverse={false}
+                    pad='large'
+                    margin='large'
+                    colorIndex='light-2'>
                     <h2>Aucun user</h2>
                 </Box>
             );

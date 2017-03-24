@@ -50,9 +50,9 @@ class Home extends React.Component {
         return (
             <Box>
                 <Header
-                fixed='true' />
+                    fixed='true' />
                 <SearchBar
-                fixed='true'
+                    fixed='true'
                     onTermsChange={this.handleChangeTerms}
                     onClick={this.handleChangeTags}
                     onDateChange={this.handleChangeDate}
@@ -69,7 +69,8 @@ class Home extends React.Component {
                     <Box colorIndex='light-1'
                         pad='small'>
                         <ProjectsStats
-                            projects={this.props.projects} />
+                            projects={this.props.projects}
+                            />
                     </Box>
                 </Split>
 

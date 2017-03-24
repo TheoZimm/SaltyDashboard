@@ -58,6 +58,7 @@ class ProjectsList extends RoleAwareComponent {
 
     render() {
         let projects = this.state.projects;
+        console.log(projects);
         if (projects.length) {
             return (
                 <Box direction='row'
