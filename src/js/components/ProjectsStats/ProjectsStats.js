@@ -49,25 +49,8 @@ class ProjectsStats extends React.Component {
         let tagsOccurences = occurence(tags);
         let tagsIndices = Object.keys(tagsOccurences);
         let tagsIndice = tagsIndices[0];
-
+                // Transform all tags occurence into a manually formated array (easier to use)
         let sortedTags = [];
-        tagsIndices.map((tagsIndice) => {
-            sortedTags.push({name: tagsIndice, amount: tagsOccurences[tagsIndice].length})
-        });
-
-        let finalTags = [];
-        sortedTags.map((tag, i) => {
-            finalTags.push({"label": tag.name, "value": tag.amount, "colorIndex": "graph-" + i});
-        });
-        //////////////////////////////////////////////////////////////////////////////////////
-
-
-        let tagsIndices = Object.keys(tagsOccurences);
-        let tagsIndice = tagsIndices[0];
-
-        let sortedTags = [];
-
-        // Transform all tags occurence into a manually formated array (easier to use)
         tagsIndices.map((tagsIndice) => {
             sortedTags.push({name: tagsIndice, amount: tagsOccurences[tagsIndice].length})
         });
@@ -77,6 +60,10 @@ class ProjectsStats extends React.Component {
         sortedTags.map((tag, i) => {
             finalTags.push({"label": tag.name, "value": tag.amount, "colorIndex": "graph-" + i});
         });
+
+
+        //////////////////////////////////////////////////////////////////////////////////////
+
 
         // ****************
         // ProjectManagers retrieval 
