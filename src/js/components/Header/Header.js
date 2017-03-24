@@ -16,8 +16,8 @@ export default function AppHeader(props) {
     }
 
     return (
+      // Component header basis
         <Header justify="center" colorIndex="neutral-4">
-
             <Box size={{width: {max: 'xxlarge'}}} direction="row"
                  responsive={false} justify="start" align="center"
                  pad={{horizontal: 'medium'}} flex="grow">
@@ -25,11 +25,13 @@ export default function AppHeader(props) {
                 <Menu label="Label" inline={true} direction="row" flex="grow">
                     <Anchor href="/">Welcome to SaltyApp</Anchor>
                 </Menu>
+                {/* See a different menu depending on your role */}
                 {CurrentRole == 'user' || CurrentRole == 'Project manager' || CurrentRole == 'Project Manager' ? (
                     <Box flex="grow" align="end">
                         <Anchor href="/disconnect">disconnect & login </Anchor>
                         <Anchor href="/profile">Logged as {CurrentRole}</Anchor>
                     </Box>
+                    
                 ) : CurrentRole == 'admin' || CurrentRole == 'Administrator' || CurrentRole == 'administrator' || CurrentRole == 'Admin' ? (
                     <Box flex="grow" align="end">
                         <Box>
