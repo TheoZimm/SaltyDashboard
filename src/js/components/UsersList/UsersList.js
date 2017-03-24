@@ -67,8 +67,8 @@ class UsersList extends RoleAwareComponent {
                             {users.map((user) => {
                                 if (user.role == 'Project Manager' || user.role == 'Project manager') {
                                     return (
-                                        <TableRow>
-                                            <td key={user.username}>
+                                        <TableRow key={user.username}>
+                                            <td >
                                                 {user.username}
                                             </td>
                                             <td className='secondary'>

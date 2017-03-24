@@ -46,7 +46,7 @@ class ProjectsStats extends React.Component {
         // Retrieve all tags from each projects
         let tags = projects.reduce((a, p) => [...a, ...p.tags], []);
 
-        // Retrieve each tags occurence (no more duplicate values)
+        // Retrieve each tags occurence (no more duplicated value)
         let tagsOccurences = occurence(tags);
 
             let tagsIndices = Object.keys(tagsOccurences);

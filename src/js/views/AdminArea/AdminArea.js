@@ -11,6 +11,7 @@ class AdminArea extends AuthorizedComponent {
   }
 
   render() {
+    console.log(...this.props); 
     return (
       <div>
         <routes {...this.props}/>

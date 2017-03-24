@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
@@ -56,3 +57,4 @@ export default function AppHeader(props) {
   );
 };
 
+*/

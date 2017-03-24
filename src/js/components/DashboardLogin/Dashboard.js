@@ -34,7 +34,7 @@ class DashboardLogin extends React.Component {
             username: this.state.login,
             password: this.state.password
         }).catch(function(error) {
-            alert('wrong login or password')
+            alert('wrong login or password');
         }).then(this.handleRedirect);
     }
 

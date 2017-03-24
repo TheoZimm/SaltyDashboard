@@ -1,18 +1,18 @@
 export default class UserListRender {
     
-    constructor(){
-        this.render = () => {}
+    constructor() {
+        this.render = () => {};
     }
 
-    subscribe(render){
+    subscribe(render) {
         this.render = render;
     }    
 
-    emit(){
+    emit() {
         this.render();
     }
 
-    unsubscribe(){
-        this.render = () =>{}
+    unsubscribe() {
+        this.render = () =>{};
     }
 }
