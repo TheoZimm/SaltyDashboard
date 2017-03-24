@@ -16,6 +16,7 @@ class App extends React.Component {
     componentWillMount() {
         var self = this;
 
+        // Get all projects
         axios.get('http://localhost:23000/api/projects')
             .then(function (response) {
                 self.setState({
@@ -23,10 +24,11 @@ class App extends React.Component {
                 });
             })
             .catch(function (error) {
-                // Make redirect to profile page for test
+                console.log(error);
             });
     }
 
+    // Send projects to home for ProjectsFeed, SearchBar and ProjectsStats
     render() {
         return (
             <Home projects={this.state.projects}/>

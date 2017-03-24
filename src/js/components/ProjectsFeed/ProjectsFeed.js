@@ -22,12 +22,16 @@ class ProjectsFeed extends React.Component {
     render() {
         let {projects, searchTerms, searchTags, searchDate} = this.props;
 
+        // Filter by terms
         if (searchTerms) {
             projects = projects.filter(project => {
                 return project.title.toLowerCase().indexOf(searchTerms.toLowerCase()) >= 0 || project.description.toLowerCase().indexOf(searchTerms.toLowerCase()) >= 0;
             });
         }
+        ////////////////////////////////////////////////////////////////////////////////////
 
+
+        // Filter by tags
         if (searchTags.length) {
             projects = projects.filter(project => {
                 return project.tags.filter(tag => {
@@ -35,43 +39,47 @@ class ProjectsFeed extends React.Component {
                 }).length;
             });
         }
+        ////////////////////////////////////////////////////////////////////////////////////
 
+
+        // Filter by date
         if (searchDate) {
-
             let projectSearchDate = new Date(searchDate);
-
             projects = projects.filter(project => {
                 let projectDeadline = new Date(project.deadline);
                 return projectDeadline >= projectSearchDate;
             });
         }
+        ////////////////////////////////////////////////////////////////////////////////////
 
+
+        // Did we have projects ?
         if (projects.length) {
-
-            ////////////////////////////////////////
 
             return (
 
                 <Box>
-                    <Box><Label>Nombre de projet(s) : {projects.length}</Label></Box>
-
+                    <Box><Label>Number of project(s): {projects.length}</Label></Box>
                     <Columns masonry={false}
                              size='small'>
 
-
                         {projects.map((project) => {
                             return (
+
                                 <Box key={project.title}
                                      pad='small'
                                      margin='small'
                                      colorIndex='light-2'
                                      className="max-height">
+
+                                    {/* Go to the details of the project */}
                                     <Card
                                         heading={project.title}
                                         description={project.description}
                                         link={<Anchor href={'/details/' + project.id} label='More info'/>}
                                     />
 
+                                    {/* Display deadline, project manager and number of workers */}
                                     <Columns masonry={true}
                                              size='medium'>
                                         <Box
@@ -86,16 +94,20 @@ class ProjectsFeed extends React.Component {
                                                 <UserIcon /> {project.nbWorker}
                                             </div>
                                         </Box>
+
+                                        {/* Display tags */}
                                         <Box
                                             pad='none'
                                             size='xsmall'
                                             wrap={true}
                                             margin='none'
                                             colorIndex='light-2'>
-                                            {project.tags.map((tag) => {
-                                                return <div key={project.tags.id}
-                                                            className="label label-success">{tag}</div>;
-                                            })}
+                                            <ul className="ui">
+                                                {project.tags.map((tag) => {
+                                                    return <li key={project.tags.id}
+                                                               className="label label-success">{tag}</li>;
+                                                })}
+                                            </ul>
                                         </Box>
                                     </Columns>
                                 </Box>
@@ -108,17 +120,14 @@ class ProjectsFeed extends React.Component {
         } else {
             return (
                 <Box>
-                    <h1>Aucun projet</h1>
+                    <h1>No project</h1>
                     <Button icon={<AddIcon />}
                             label='Create a new one'
-
                             href='#'/>
                 </Box>
             );
         }
-
     };
-
 }
 
 export default ProjectsFeed;

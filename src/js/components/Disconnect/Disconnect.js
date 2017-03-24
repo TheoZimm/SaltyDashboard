@@ -1,31 +1,36 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
 
 class Disconnect extends Component {
 
-  componentWillMount() {
-      this.logout();
-      browserHistory.push('/login');
-  }
+    // Disconnect user when component is call
+    componentWillMount() {
+        this.logout();
+        browserHistory.push('/login');
+    }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem('user'));
-  }
+    // Get user in localStorage (session)
+    getUser() {
+        return JSON.parse(localStorage.getItem('user'));
+    }
 
-  isLoggedIn() {
-    return this.getUser() != null;
-  }
+    isLoggedIn() {
+        return this.getUser() != null;
+    }
 
-  logout() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-  }
-  render() {
-    return (
-      <div>
-      {console.log('userRemoved from localStorage')}
-      </div>
-    );
-  };
-};
+    // Remove info from localStorage (session destroy)
+    logout() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    }
+
+    render() {
+        return (
+            <div>
+                {console.log('userRemoved from localStorage')}
+            </div>
+        );
+    };
+}
+;
 export default Disconnect;

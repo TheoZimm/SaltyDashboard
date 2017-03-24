@@ -18,6 +18,7 @@ class Details extends React.Component {
     componentWillMount() {
         var self = this;
 
+        // Get one projects
         axios.get('http://localhost:23000/api/projects/' + self.props.params.id)
             .then(function (response) {
                 self.setState({
@@ -25,17 +26,16 @@ class Details extends React.Component {
                 });
             })
             .catch(function (error) {
-                // Make redirect to profile page for test
+                console.log(error);
             });
     }
 
-
+    // Send project data to ProjectDetails component
     render() {
         return (
             <Box>
                 <Header />
                 <ProjectDetails project={this.state.project}/>
-
             </Box>);
     }
 }

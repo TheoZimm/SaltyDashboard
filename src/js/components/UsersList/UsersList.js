@@ -9,8 +9,12 @@ class UsersList extends RoleAwareComponent {
 
     constructor(props) {
         super(props);
+
+        // Get user role from localStorage(session) and define allowed roles
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['admin', 'Administrator'];
+
+        // Define states
         this.state = {
             users: ''
         };
@@ -20,6 +24,7 @@ class UsersList extends RoleAwareComponent {
     componentDidMount() {
         var self = this;
 
+        // Get all users
         axios.get('http://localhost:23000/api/users')
             .then(function (response) {
                 self.setState({
@@ -27,53 +32,56 @@ class UsersList extends RoleAwareComponent {
                 });
             })
             .catch(function (error) {
-                // Make redirect to profile page for test
+                console.log(error);
             });
     }
 
 
     render() {
         let users = this.state.users;
+
+        // Did we have some project manager ?
         if (users.length) {
             return (
                 <Box direction='row'
-                    justify='start'
-                    align='center'
-                    wrap={true}
-                    reverse={false}
-                    pad='small'
-                    margin='small'
-                    colorIndex='light-2'>
+                     justify='start'
+                     align='center'
+                     wrap={true}
+                     reverse={false}
+                     pad='small'
+                     margin='small'
+                     colorIndex='light-2'>
                     <Heading>List of project managers</Heading>
                     <Table>
-
                         <thead>
                         <tr>
                             <th>
                                 Name
                             </th>
                             <th>
-                                role
+                                Role
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                            {users.map((user) => {
-                                if (user.role == 'Project Manager' || user.role == 'Project manager') {
-                                    return (
-                                        <TableRow>
-                                            <td key={user.username}>
-                                                {user.username}
-                                            </td>
-                                            <td className='secondary'>
-                                                {user.role}
-                                            </td>
-                                        </TableRow>
-                                    );
-                                } else {
-                                    return console.log('oui');
-                                }
-                            })}
+
+                        {/* Display list of project manager  */}
+                        {users.map((user) => {
+                            if (user.role == 'Project Manager' || user.role == 'Project manager') {
+                                return (
+                                    <TableRow>
+                                        <td key={user.username}>
+                                            {user.username}
+                                        </td>
+                                        <td className='secondary'>
+                                            {user.role}
+                                        </td>
+                                    </TableRow>
+                                );
+                            } else {
+                                return "";
+                            }
+                        })}
                         </tbody>
                     </Table>
                 </Box>
@@ -88,7 +96,7 @@ class UsersList extends RoleAwareComponent {
                      pad='large'
                      margin='large'
                      colorIndex='light-2'>
-                    <h2>Aucun user</h2>
+                    <h2>No users</h2>
                 </Box>
             );
         }

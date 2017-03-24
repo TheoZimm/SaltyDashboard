@@ -17,24 +17,29 @@ class ProjectManagement extends React.Component {
     constructor(props) {
         super(props);
 
+        // Define states
         this.state = {
             layer: true,
             projects: [],
             tags: []
         };
 
+        // Bind event when user want to display the layer (modal)
         this.handleLayer = this.handleLayer.bind(this);
 
     }
 
+    // Get projects
     componentWillReceiveProps(nextProps) {
         this.setState({
             projects: nextProps.projects
         });
     }
 
+    // Get tags
     componentDidMount() {
         self = this;
+
         axios.get('http://localhost:23000/api/tags')
             .then(function (response) {
                 self.setState({
@@ -42,11 +47,11 @@ class ProjectManagement extends React.Component {
                 });
             })
             .catch(function (error) {
-                // Make redirect to profile page for test
+                console.log(error);
             });
     }
 
-
+    // Delete project by id
     deleteProject(id) {
         axios.delete('http://localhost:23000/api/projects/', {
             data: {id: id}
@@ -61,16 +66,20 @@ class ProjectManagement extends React.Component {
             });
     }
 
+    // Display the layer (modal)
     handleLayer() {
         this.setState({layer: false});
     }
 
     render() {
+
+        // Did we have projects and tags ?
         if (this.state.projects.length > 0 && this.state.tags.length > 0) {
             return (
 
                 <Box pad="medium">
 
+                    {/* Layer (modal) */}
                     <Layer closer={true}
                            flush={false}
                            hidden={this.state.layer}>
@@ -82,11 +91,14 @@ class ProjectManagement extends React.Component {
                         Projects list
                     </Heading>
 
+                    {/* Action for display layer */}
                     <Button icon={<AddIcon />}
                             label='New project'
                             onClick={this.handleLayer}
                     />
 
+
+                    {/* Display project of current project manager */}
                     <Table>
                         <thead>
                         <tr>
@@ -125,6 +137,7 @@ class ProjectManagement extends React.Component {
                                         {project.status}
                                     </td>
                                     <td>
+                                        {/* Action for edit and delete project */}
                                         <Button icon={<EditIcon />}
                                                 primary={false}
                                                 secondary={false}/>
@@ -149,7 +162,7 @@ class ProjectManagement extends React.Component {
                         <NewProject tags={this.state.tags}/>
                     </Layer>
 
-                    <h1>Vous ne disposez pas de projet</h1>
+                    <h1>No project</h1>
                     <Button icon={<AddIcon />}
                             label='New project'
                             onClick={this.handleLayer}

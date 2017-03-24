@@ -20,18 +20,20 @@ class ProjectDetails extends React.Component {
         super(props);
     }
 
-
-
     render() {
 
         var status = "";
 
+        // Define if project is closed or opened
         if (this.props.project.status == 'open') {
             status = <div className="status-open">{this.props.project.status}</div>;
         } else {
             status = <div className="status-close">{this.props.project.status}</div>;
         }
+        ////////////////////////////////////////////////////////////////////////////
 
+        // If projectManager is set ? full object : missing info
+        // Nothing special, display all information received in JSON by the server
         if (this.props.project.projectManager !== undefined) {
             return (
                 <Box>
@@ -97,6 +99,7 @@ class ProjectDetails extends React.Component {
                         </Box>
                     </Columns>
 
+                    {/* For filling the details page with more information */}
                     <Box
                         pad="medium">
                         <Accordion openMulti={true}>
@@ -117,7 +120,7 @@ class ProjectDetails extends React.Component {
         } else {
             return (
                 <Box>
-                    <h1>Chargement</h1>
+                    <h1>Loading</h1>
                 </Box>
             );
         }

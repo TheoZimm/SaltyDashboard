@@ -11,11 +11,17 @@ import Select from 'grommet/components/Select';
 import NumberInput from 'grommet/components/NumberInput';
 
 
+/////////////////////////////////////////////////
+// DOESN'T WORK                                //
+/////////////////////////////////////////////////
+
+
 class NewProject extends RoleAwareComponent {
 
     constructor(props) {
         super(props);
 
+        // Define states
         this.state = {
             tags: [],
             status: "",
@@ -25,23 +31,24 @@ class NewProject extends RoleAwareComponent {
             nbworkers: 0
         };
 
+        // Bind change in form
         this.handleChange = this.handleChange.bind(this);
 
     }
 
+    // Set value in states
     handleChange(event) {
 
         const target = event.target;
         const value = target.value;
         const name = target.name;
 
-        console.log(name + " = " + value);
-
         this.setState({
             [name]: value
         });
     }
 
+    // Display content of layer
     render() {
         return (
             <Box>

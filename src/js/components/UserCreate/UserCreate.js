@@ -1,15 +1,18 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
-import { RoleAwareComponent } from 'react-router-role-authorization';
+import {RoleAwareComponent} from 'react-router-role-authorization';
 import Heading from 'grommet/components/Heading';
-import { browserHistory } from 'react-router';
+import {browserHistory} from 'react-router';
 import axios from 'axios';
 class UserCreate extends RoleAwareComponent {
 
     constructor(props) {
         super(props);
+
+        // Get user role from localStorage(session) and define allowed roles
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['admin', 'Administrator', 'Admin'];
+
 
         // Initialize state for the crud
         this.state = {
@@ -17,6 +20,9 @@ class UserCreate extends RoleAwareComponent {
             password: '',
             role: 'Project Manager'
         };
+
+
+        // Bind event on form
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -24,6 +30,7 @@ class UserCreate extends RoleAwareComponent {
 
     handleChange(event) {
 
+        // Set value from form
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -35,6 +42,8 @@ class UserCreate extends RoleAwareComponent {
 
     handleSubmit(e) {
         e.preventDefault();
+
+        // Send request to add user
         axios.post('http://localhost:23000/api/user', {
             username: this.state.username,
             password: this.state.password,
@@ -45,7 +54,10 @@ class UserCreate extends RoleAwareComponent {
             }).then(this.handleRedirect);
 
     }
+
     handleRedirect(res) {
+
+        // Request succeed push to UserManagement view
         if (res.status == 200) {
             alert('The user has been created');
             browserHistory.push('/UserManagement');
@@ -57,20 +69,20 @@ class UserCreate extends RoleAwareComponent {
 
     render() {
 
-        const jsx = (
+        const formUser = (
             <Box direction='row'
-                justify='start'
-                align='center'
-                wrap={true}
-                reverse={false}
-                pad='small'
-                margin='small'
-                colorIndex='light-2'>
+                 justify='start'
+                 align='center'
+                 wrap={true}
+                 reverse={false}
+                 pad='small'
+                 margin='small'
+                 colorIndex='light-2'>
 
                 <form onSubmit={this.handleSubmit}>
                     <Heading>
                         Create a new Project Manager
-    </Heading>
+                    </Heading>
                     <label>
                         Username:
                         <input
@@ -78,7 +90,7 @@ class UserCreate extends RoleAwareComponent {
                             type="text"
                             required
                             onChange={this.handleChange}
-                            value={this.state.username} />
+                            value={this.state.username}/>
                     </label>
                     <br />
                     <label>
@@ -88,13 +100,14 @@ class UserCreate extends RoleAwareComponent {
                             type="password"
                             required
                             onChange={this.handleChange}
-                            value={this.state.password} />
+                            value={this.state.password}/>
                     </label>
-                    <input type="submit" value="Create" />
+                    <input type="submit" value="Create"/>
                 </form>
             </Box>
         );
-        return this.rolesMatched() ? jsx : null;
+        return this.rolesMatched() ? formUser : null;
     }
-};
+}
+;
 export default UserCreate;

@@ -14,39 +14,41 @@ class Profile extends RoleAwareComponent {
             projects: []
         };
 
+        // Get user role from localStorage(session) and define allowed roles
         this.userRoles = [JSON.parse(localStorage.getItem('user')).role];
         this.allowedRoles = ['user', 'utilisateur', 'Project Manager', 'Project manager'];
-
     }
 
 
     componentWillMount() {
         var self = this;
 
+        // Get all projects and filter by current project manager
         axios.get('http://localhost:23000/api/projects')
             .then(function (response) {
 
                 self.setState({
                     projects: response.data.filter(project => {
-                        return project.projectManager.username ==  [JSON.parse(localStorage.getItem('user')).username].toString();
+                        return project.projectManager.username == [JSON.parse(localStorage.getItem('user')).username].toString();
                     })
                 });
             })
             .catch(function (error) {
-                // Make redirect to profile page for test
+                console.log(error);
             });
     }
 
 
     render() {
-        const jsx = (
+        const profileView = (
             <Box>
                 <Header />
-
                 <ProjectManagement projects={this.state.projects}/>
             </Box>
         );
-        return this.rolesMatched() ? jsx : null;
+
+        // Return view if allowed
+        return this.rolesMatched() ? profileView : null;
     }
 }
 ;

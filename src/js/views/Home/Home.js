@@ -16,6 +16,7 @@ class Home extends React.Component {
             date: ''
         };
 
+        // Bind event
         this.handleChangeTerms = this.handleChangeTerms.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
@@ -24,16 +25,17 @@ class Home extends React.Component {
 
     handleChangeTerms(searchTerms) {
 
-        this.setState({ searchTerms });
+        this.setState({searchTerms});
     }
 
     handleChangeDate(date) {
 
-        this.setState({ date });
+        this.setState({date});
     }
 
     handleChangeTags(tags) {
 
+        // Add tags in array
         let tempTags = this.state.tags;
         let index = tempTags.indexOf(tags);
 
@@ -43,36 +45,42 @@ class Home extends React.Component {
             tempTags.splice(index, 1);
         }
 
-        this.setState({ tags: tempTags });
+        this.setState({tags: tempTags});
     }
 
+    // Return component SearchBar, ProjectsFeed, ProjectsStats for the home page.
     render() {
         return (
             <Box>
-                <Header />
+                <Header
+                    fixed='true'/>
+
+                {/* Handle for each event of SearchBar and give all projects for filter by tags */}
                 <SearchBar
+                    fixed='true'
                     onTermsChange={this.handleChangeTerms}
                     onClick={this.handleChangeTags}
                     onDateChange={this.handleChangeDate}
-                    projects={this.props.projects} />
+                    projects={this.props.projects}/>
+
                 <Split flex='both'>
                     <Box colorIndex='light-1'
-                        pad='small'>
+                         pad='small'>
+
+                        {/* Give value of SearchBar and projects to filter it */}
                         <ProjectsFeed
                             searchTerms={this.state.searchTerms}
                             searchTags={this.state.tags}
                             searchDate={this.state.date}
-                            projects={this.props.projects} />
+                            projects={this.props.projects}/>
+
                     </Box>
-                    <Box colorIndex='light-2'
-                        pad='small'>
+                    <Box colorIndex='light-1'
+                         pad='small'>
                         <ProjectsStats
-                            projects={this.props.projects} />
+                            projects={this.props.projects}/>
                     </Box>
                 </Split>
-
-
-
             </Box>
         );
     };

@@ -19,6 +19,7 @@ class SearchBar extends React.Component {
             date: ''
         };
 
+        // Bind events on change
         this.handleChangeTerms = this.handleChangeTerms.bind(this);
         this.handleChangeTags = this.handleChangeTags.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
@@ -26,17 +27,23 @@ class SearchBar extends React.Component {
 
 
     handleChangeTerms(e) {
-        this.setState({ searchTerms: e });
+        this.setState({searchTerms: e});
+
+        // Send to Home view the searchTerms for filter
         this.props.onTermsChange(e.target.value);
     }
 
     handleChangeTags(e) {
         this.setState({tags: e});
+
+        // Send to Home view the tags for filter
         this.props.onClick(e.target.value);
     }
 
     handleChangeDate(e) {
-        this.setState({ date: e });
+        this.setState({date: e});
+
+        // Send to Home view the deadline for filter
         this.props.onDateChange(e);
     }
 
@@ -45,7 +52,6 @@ class SearchBar extends React.Component {
         let tags = [];
 
         // Generate array of tags
-        //-----------------------
         this.props.projects.forEach((project) => {
             project.tags.forEach((tag) => {
                 tags.push(tag);
@@ -53,13 +59,11 @@ class SearchBar extends React.Component {
         });
 
         // Make unique value and sort
-        //------------------
         tags = Array.from(new Set(tags));
         tags.sort();
 
 
         // Display
-        //--------
         return (
             <Header fixed={false}
                     float={false}
