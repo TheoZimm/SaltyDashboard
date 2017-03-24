@@ -8,6 +8,8 @@ import Anchor from 'grommet/components/Anchor';
 import DeliverIcon from 'grommet/components/icons/base/Deliver';
 import Timestamp from 'grommet/components/Timestamp';
 import Label from 'grommet/components/Label';
+import AddIcon from 'grommet/components/icons/base/Add';
+import Button from 'grommet/components/Button';
 
 
 class ProjectsFeed extends React.Component {
@@ -39,9 +41,7 @@ class ProjectsFeed extends React.Component {
             let projectSearchDate = new Date(searchDate);
 
             projects = projects.filter(project => {
-
                 let projectDeadline = new Date(project.deadline);
-
                 return projectDeadline >= projectSearchDate;
             });
         }
@@ -75,9 +75,9 @@ class ProjectsFeed extends React.Component {
                                     <Columns masonry={true}
                                              size='medium'>
                                         <Box
-                                             pad='small'
-                                             margin='small'
-                                             colorIndex='light-2'>
+                                            pad='small'
+                                            margin='small'
+                                            colorIndex='light-2'>
                                             <div className="align-left">
                                                 <DeliverIcon /> <Timestamp value={project.deadline} fields='date'/>
                                                 <br/>
@@ -86,14 +86,15 @@ class ProjectsFeed extends React.Component {
                                                 <UserIcon /> {project.nbWorker}
                                             </div>
                                         </Box>
-                                        <Box 
-                                             pad='none'
-                                             size='xsmall'
-                                             wrap={true} 
-                                             margin='none'
-                                             colorIndex='light-2'>
+                                        <Box
+                                            pad='none'
+                                            size='xsmall'
+                                            wrap={true}
+                                            margin='none'
+                                            colorIndex='light-2'>
                                             {project.tags.map((tag) => {
-                                                return <div key={project.tags.id} className="label label-success">{tag}</div>;
+                                                return <div key={project.tags.id}
+                                                            className="label label-success">{tag}</div>;
                                             })}
                                         </Box>
                                     </Columns>
@@ -106,7 +107,13 @@ class ProjectsFeed extends React.Component {
             );
         } else {
             return (
-                <h1>Aucun projet</h1>
+                <Box>
+                    <h1>Aucun projet</h1>
+                    <Button icon={<AddIcon />}
+                            label='Create a new one'
+
+                            href='#'/>
+                </Box>
             );
         }
 

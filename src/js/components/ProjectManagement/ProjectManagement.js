@@ -10,6 +10,7 @@ import Heading from 'grommet/components/Heading';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Layer from 'grommet/components/Layer';
 import NewProject from '../NewProject';
+import axios from 'axios';
 
 class ProjectManagement extends React.Component {
 
@@ -17,24 +18,55 @@ class ProjectManagement extends React.Component {
         super(props);
 
         this.state = {
-            layer: true
+            layer: true,
+            projects: [],
+            tags: []
         };
 
         this.handleLayer = this.handleLayer.bind(this);
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            projects: nextProps.projects
+        });
+    }
+
+    componentDidMount() {
+        self = this;
+        axios.get('http://localhost:23000/api/tags')
+            .then(function (response) {
+                self.setState({
+                    tags: response.data
+                });
+            })
+            .catch(function (error) {
+                // Make redirect to profile page for test
+            });
     }
 
 
-    handleChangeDate(e) {
-        console.log(e);
+    deleteProject(id) {
+        axios.delete('http://localhost:23000/api/projects/', {
+            data: {id: id}
+        })
+            .then((response) => {
+                alert('The project has been deleted');
+
+                this.setState(s => ({
+                    projects: this.state.projects.filter(p => p.id !== id)
+                }));
+
+            });
     }
 
     handleLayer() {
-        this.setState({ layer: false });
+        this.setState({layer: false});
     }
 
     render() {
-        if (this.props.projects.length > 0) {
-            console.log(this.state.layer);
+        if (this.state.projects.length > 0 && this.state.tags.length > 0) {
             return (
 
                 <Box pad="medium">
@@ -42,8 +74,9 @@ class ProjectManagement extends React.Component {
                     <Layer closer={true}
                            flush={false}
                            hidden={this.state.layer}>
-                            <NewProject />
+                        <NewProject tags={this.state.tags}/>
                     </Layer>
+
 
                     <Heading>
                         Projects list
@@ -52,7 +85,7 @@ class ProjectManagement extends React.Component {
                     <Button icon={<AddIcon />}
                             label='New project'
                             onClick={this.handleLayer}
-                            />
+                    />
 
                     <Table>
                         <thead>
@@ -75,11 +108,11 @@ class ProjectManagement extends React.Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.props.projects.map((project) => {
+                        {this.state.projects.map((project) => {
 
                             return (
-                                <TableRow key={project.id}>
-                                    <td>
+                                <TableRow>
+                                    <td key={project.id}>
                                         {project.title}
                                     </td>
                                     <td>
@@ -93,15 +126,12 @@ class ProjectManagement extends React.Component {
                                     </td>
                                     <td>
                                         <Button icon={<EditIcon />}
-                                                onClick={this.handleChangeDate}
-                                                href='#'
                                                 primary={false}
-                                                secondary={false} />
+                                                secondary={false}/>
                                         <Button icon={<TrashIcon />}
-                                                onClick={this.handleChangeDate}
-                                                href='#'
+                                                onClick={() => this.deleteProject(project.id)}
                                                 primary={false}
-                                                secondary={false} />
+                                                secondary={false}/>
                                     </td>
                                 </TableRow>
                             );
@@ -111,8 +141,19 @@ class ProjectManagement extends React.Component {
                     </Table> </Box>);
         } else {
             return (
-                <Box>
+                <Box pad="medium">
+
+                    <Layer closer={true}
+                           flush={false}
+                           hidden={this.state.layer}>
+                        <NewProject tags={this.state.tags}/>
+                    </Layer>
+
                     <h1>Vous ne disposez pas de projet</h1>
+                    <Button icon={<AddIcon />}
+                            label='New project'
+                            onClick={this.handleLayer}
+                    />
                 </Box>
             );
         }

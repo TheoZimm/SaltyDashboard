@@ -26,15 +26,10 @@ class Profile extends RoleAwareComponent {
         axios.get('http://localhost:23000/api/projects')
             .then(function (response) {
 
-                var tempProjects = [];
-
-                tempProjects = response.data.filter(project => {
-                        return project.projectManager.username ==  [JSON.parse(localStorage.getItem('user')).username].toString();
-                    });
-
-
                 self.setState({
-                    projects: tempProjects
+                    projects: response.data.filter(project => {
+                        return project.projectManager.username ==  [JSON.parse(localStorage.getItem('user')).username].toString();
+                    })
                 });
             })
             .catch(function (error) {
@@ -44,7 +39,6 @@ class Profile extends RoleAwareComponent {
 
 
     render() {
-        console.log(this.state.projects);
         const jsx = (
             <Box>
                 <Header />

@@ -20,6 +20,8 @@ class ProjectDetails extends React.Component {
         super(props);
     }
 
+
+
     render() {
 
         var status = "";

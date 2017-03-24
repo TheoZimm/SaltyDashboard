@@ -79,7 +79,7 @@ export default {
   },
   devServerPort: 8002,
   //devServerHost: "10.0.0.1",
-  scsslint: true,
+  scsslint: false,
   hot: true,
   inline: true,
   alias: {
